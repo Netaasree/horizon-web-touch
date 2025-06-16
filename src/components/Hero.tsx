@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 import TypingEffect from './TypingEffect';
 
 const Hero = () => {
@@ -82,12 +82,6 @@ const Hero = () => {
               <Mail size={24} />
             </a>
           </div>
-        </div>
-
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-slow">
-          <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors duration-300">
-            <ArrowDown size={32} />
-          </a>
         </div>
       </div>
     </section>
