@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Code, Lightbulb, Users, Award } from 'lucide-react';
+import { Code, Lightbulb, Users, Award, Sparkles } from 'lucide-react';
 
 const About = () => {
   const highlights = [
@@ -8,29 +8,46 @@ const About = () => {
       icon: <Code className="w-8 h-8" />,
       title: 'Clean Code',
       description: 'Writing maintainable, scalable, and efficient code',
+      color: 'from-blue-500 to-cyan-500'
     },
     {
       icon: <Lightbulb className="w-8 h-8" />,
       title: 'Innovation',
       description: 'Always exploring new technologies and methodologies',
+      color: 'from-yellow-500 to-orange-500'
     },
     {
       icon: <Users className="w-8 h-8" />,
       title: 'Collaboration',
       description: 'Strong team player with excellent communication',
+      color: 'from-green-500 to-emerald-500'
     },
     {
       icon: <Award className="w-8 h-8" />,
       title: 'Excellence',
       description: 'Committed to delivering high-quality solutions',
+      color: 'from-purple-500 to-pink-500'
     },
   ];
 
   return (
-    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 text-blue-500/20 animate-pulse">
+          <Sparkles size={24} />
+        </div>
+        <div className="absolute bottom-20 right-10 text-purple-500/20 animate-pulse" style={{ animationDelay: '2s' }}>
+          <Sparkles size={20} />
+        </div>
+        <div className="absolute top-1/2 left-1/4 text-pink-500/20 animate-pulse" style={{ animationDelay: '4s' }}>
+          <Sparkles size={16} />
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gradient">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-gradient">
             About Me
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -38,13 +55,14 @@ const About = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="animate-slide-in-left">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-2xl transform rotate-6"></div>
-              <div className="relative glass rounded-2xl p-8">
-                <div className="w-64 h-64 mx-auto bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-6xl font-bold text-white">
-                  JD
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 rounded-3xl blur-3xl transform rotate-6 group-hover:rotate-12 transition-transform duration-500"></div>
+              <div className="relative glass rounded-3xl p-8 group-hover:bg-white/15 transition-all duration-500">
+                <div className="w-72 h-72 mx-auto bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-full flex items-center justify-center text-8xl font-bold text-white relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                  <span className="relative z-10">JD</span>
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
               </div>
             </div>
@@ -69,13 +87,14 @@ const About = () => {
               {highlights.map((item, index) => (
                 <div
                   key={index}
-                  className="glass p-6 rounded-xl hover:bg-white/10 transition-all duration-300 group"
+                  className="group glass p-6 rounded-xl hover:bg-white/15 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 relative overflow-hidden"
                 >
-                  <div className="text-blue-400 mb-3 group-hover:scale-110 transition-transform duration-300">
+                  <div className={`absolute inset-0 bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                  <div className={`text-transparent bg-gradient-to-r ${item.color} bg-clip-text mb-3 group-hover:scale-110 transition-transform duration-500`}>
                     {item.icon}
                   </div>
-                  <h4 className="text-lg font-semibold mb-2">{item.title}</h4>
-                  <p className="text-muted-foreground text-sm">{item.description}</p>
+                  <h4 className="text-lg font-semibold mb-2 relative z-10">{item.title}</h4>
+                  <p className="text-muted-foreground text-sm relative z-10">{item.description}</p>
                 </div>
               ))}
             </div>
