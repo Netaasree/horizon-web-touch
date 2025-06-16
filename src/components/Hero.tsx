@@ -6,8 +6,7 @@ import TypingEffect from './TypingEffect';
 const Hero = () => {
   const roles = [
     'Full Stack Developer',
-    'React Specialist',
-    'UI/UX Designer',
+    'AI/Ml Engineer',
     'Problem Solver',
   ];
 
@@ -45,9 +44,8 @@ const Hero = () => {
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
         <div className="animate-fade-in-up">
           <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-8">
-            Hi, I'm{' '}
             <span className="text-gradient relative">
-              John Doe
+              Bhimaraju Netaasree
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-lg blur-xl"></div>
             </span>
           </h1>
