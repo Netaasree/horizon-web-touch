@@ -42,12 +42,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="relative overflow-hidden">
         {project.media[0].type === 'video' ? (
           <div className="relative">
-            <img
-              src={project.media[0].thumbnail}
-              alt={project.title}
+            <video
+              src={project.media[0].src}
+              poster={project.media[0].thumbnail}
               className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+              muted
+              loop
+              onMouseEnter={(e) => e.currentTarget.play()}
+              onMouseLeave={(e) => e.currentTarget.pause()}
             />
-            <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-all duration-300">
+            <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-80 group-hover:opacity-0 transition-all duration-300 pointer-events-none">
               <Video size={40} className="text-white" />
             </div>
           </div>
