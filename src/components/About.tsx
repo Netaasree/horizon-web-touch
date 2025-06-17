@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { Code, Lightbulb, Users, Award, Sparkles } from 'lucide-react';
+import { Code, Lightbulb, Users, Award, Sparkles, FileText, Download } from 'lucide-react';
+import { Button } from './ui/button';
 
 const About = () => {
   const highlights = [
@@ -69,6 +70,22 @@ const About = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
               </div>
+            </div>
+            
+            {/* Resume Buttons */}
+            <div className="mt-8 flex justify-center gap-4">
+              <Button variant="outline" className="gap-2 group hover:bg-blue-500/20 transition-all duration-300">
+                <FileText className="w-5 h-5 group-hover:text-blue-400 transition-colors duration-300" />
+                <a href="/src/assets/resume.pdf" target="_blank" rel="noopener noreferrer" className="group-hover:text-blue-400 transition-colors duration-300">
+                  View Resume
+                </a>
+              </Button>
+              <Button variant="outline" className="gap-2 group hover:bg-purple-500/20 transition-all duration-300">
+                <Download className="w-5 h-5 group-hover:text-purple-400 transition-colors duration-300" />
+                <a href="/src/assets/resume.pdf" download className="group-hover:text-purple-400 transition-colors duration-300">
+                  Download Resume
+                </a>
+              </Button>
             </div>
           </div>
 

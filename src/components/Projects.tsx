@@ -1,10 +1,11 @@
+
 import React, { useState } from 'react';
-import { ExternalLink, Github, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ExternalLink, Github, X, ChevronLeft, ChevronRight, Video, FileVideo } from 'lucide-react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
 
   const projects = [
     {
@@ -12,7 +13,11 @@ const Projects = () => {
       description: 'A full-stack e-commerce solution with React, Node.js, and MongoDB',
       longDescription: 'A comprehensive e-commerce platform featuring user authentication, product management, shopping cart functionality, payment integration with Stripe, order tracking, and an admin dashboard. Built with modern technologies and following best practices for scalability and security.',
       tech: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Tailwind CSS'],
-      images: ['/placeholder.svg', '/placeholder.svg', '/placeholder.svg'],
+      media: [
+        { type: 'video', src: '/placeholder.mp4', thumbnail: '/placeholder.svg' },
+        { type: 'image', src: '/placeholder.svg' },
+        { type: 'image', src: '/placeholder.svg' }
+      ],
       github: 'https://github.com',
       live: 'https://example.com',
       featured: true,
@@ -22,7 +27,11 @@ const Projects = () => {
       description: 'Collaborative task management tool with real-time updates',
       longDescription: 'A collaborative task management application with real-time synchronization, drag-and-drop functionality, team collaboration features, file attachments, and detailed analytics. Perfect for teams looking to improve their productivity and workflow management.',
       tech: ['React', 'Socket.io', 'Express', 'PostgreSQL'],
-      images: ['/placeholder.svg', '/placeholder.svg'],
+      media: [
+        { type: 'video', src: '/placeholder.mp4', thumbnail: '/placeholder.svg' },
+        { type: 'image', src: '/placeholder.svg' },
+        { type: 'image', src: '/placeholder.svg' }
+      ],
       github: 'https://github.com',
       live: 'https://example.com',
       featured: true,
@@ -32,7 +41,10 @@ const Projects = () => {
       description: 'Beautiful weather app with forecasts and location-based data',
       longDescription: 'A comprehensive weather dashboard providing current conditions, 7-day forecasts, interactive maps, weather alerts, and historical data. Features a beautiful, responsive design with smooth animations and intuitive user experience.',
       tech: ['React', 'OpenWeather API', 'Chart.js', 'CSS3'],
-      images: ['/placeholder.svg'],
+      media: [
+        { type: 'video', src: '/placeholder.mp4', thumbnail: '/placeholder.svg' },
+        { type: 'image', src: '/placeholder.svg' }
+      ],
       github: 'https://github.com',
       live: 'https://example.com',
       featured: false,
@@ -42,7 +54,10 @@ const Projects = () => {
       description: 'Personal portfolio with modern design and animations',
       longDescription: 'A stunning personal portfolio website showcasing projects, skills, and experience. Features smooth scrolling, animated elements, dark/light mode toggle, contact form, and fully responsive design. Built with attention to detail and performance optimization.',
       tech: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
-      images: ['/placeholder.svg', '/placeholder.svg'],
+      media: [
+        { type: 'video', src: '/placeholder.mp4', thumbnail: '/placeholder.svg' },
+        { type: 'image', src: '/placeholder.svg' }
+      ],
       github: 'https://github.com',
       live: 'https://example.com',
       featured: false,
@@ -54,26 +69,53 @@ const Projects = () => {
 
   const openProject = (index: number) => {
     setSelectedProject(index);
-    setCurrentImageIndex(0);
+    setCurrentMediaIndex(0);
   };
 
   const closeProject = () => {
     setSelectedProject(null);
-    setCurrentImageIndex(0);
+    setCurrentMediaIndex(0);
   };
 
-  const nextImage = () => {
+  const nextMedia = () => {
     const project = projects[selectedProject!];
-    setCurrentImageIndex((prev) => 
-      prev === project.images.length - 1 ? 0 : prev + 1
+    setCurrentMediaIndex((prev) => 
+      prev === project.media.length - 1 ? 0 : prev + 1
     );
   };
 
-  const prevImage = () => {
+  const prevMedia = () => {
     const project = projects[selectedProject!];
-    setCurrentImageIndex((prev) => 
-      prev === 0 ? project.images.length - 1 : prev - 1
+    setCurrentMediaIndex((prev) => 
+      prev === 0 ? project.media.length - 1 : prev - 1
     );
+  };
+
+  const renderMediaItem = (media: any, index: number) => {
+    if (media.type === 'video') {
+      return (
+        <div className="relative">
+          <video
+            src={media.src}
+            className="w-full h-64 sm:h-80 object-cover rounded-lg"
+            controls
+            poster={media.thumbnail}
+          ></video>
+          <div className="absolute top-2 left-2 bg-black/60 text-white px-2 py-1 rounded-md flex items-center">
+            <FileVideo size={14} className="mr-1" />
+            Video
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <img
+          src={media.src}
+          alt={`Project media ${index}`}
+          className="w-full h-64 sm:h-80 object-cover rounded-lg"
+        />
+      );
+    }
   };
 
   const ProjectCard = ({ project, index, featured = false }: { project: any, index: number, featured?: boolean }) => (
@@ -84,11 +126,24 @@ const Projects = () => {
       onClick={() => openProject(index)}
     >
       <div className="relative overflow-hidden">
-        <img
-          src={project.images[0]}
-          alt={project.title}
-          className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-        />
+        {project.media[0].type === 'video' ? (
+          <div className="relative">
+            <img
+              src={project.media[0].thumbnail}
+              alt={project.title}
+              className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+            />
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-all duration-300">
+              <Video size={40} className="text-white" />
+            </div>
+          </div>
+        ) : (
+          <img
+            src={project.media[0].src}
+            alt={project.title}
+            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <span className="bg-blue-500/80 text-white px-2 py-1 rounded text-sm font-medium">
@@ -193,33 +248,29 @@ const Projects = () => {
                 </button>
 
                 <div className="relative mb-6">
-                  <img
-                    src={projects[selectedProject].images[currentImageIndex]}
-                    alt={projects[selectedProject].title}
-                    className="w-full h-64 sm:h-80 object-cover rounded-lg"
-                  />
+                  {renderMediaItem(projects[selectedProject].media[currentMediaIndex], currentMediaIndex)}
                   
-                  {projects[selectedProject].images.length > 1 && (
+                  {projects[selectedProject].media.length > 1 && (
                     <>
                       <button
-                        onClick={prevImage}
+                        onClick={prevMedia}
                         className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 bg-black/50 hover:bg-black/70 rounded-full transition-colors duration-300"
                       >
                         <ChevronLeft size={20} />
                       </button>
                       <button
-                        onClick={nextImage}
+                        onClick={nextMedia}
                         className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 bg-black/50 hover:bg-black/70 rounded-full transition-colors duration-300"
                       >
                         <ChevronRight size={20} />
                       </button>
                       
                       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                        {projects[selectedProject].images.map((_, i) => (
+                        {projects[selectedProject].media.map((_, i) => (
                           <div
                             key={i}
                             className={`w-2 h-2 rounded-full ${
-                              i === currentImageIndex ? 'bg-white' : 'bg-white/40'
+                              i === currentMediaIndex ? 'bg-white' : 'bg-white/40'
                             }`}
                           />
                         ))}
