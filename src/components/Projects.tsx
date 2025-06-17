@@ -1,20 +1,36 @@
-
 import React, { useState } from 'react';
-import { ExternalLink, Github, X, ChevronLeft, ChevronRight, Video, FileVideo } from 'lucide-react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import ProjectCard from './ProjectCard';
+import ProjectModal from './ProjectModal';
+
+interface MediaItem {
+  type: 'video' | 'image';
+  src: string;
+  thumbnail?: string;
+}
+
+interface Project {
+  title: string;
+  description: string;
+  longDescription: string;
+  tech: string[];
+  media: MediaItem[];
+  github: string;
+  live: string;
+  featured: boolean;
+}
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
 
-  const projects = [
+  const projects: Project[] = [
     {
       title: 'E-Commerce Platform',
       description: 'A full-stack e-commerce solution with React, Node.js, and MongoDB',
       longDescription: 'A comprehensive e-commerce platform featuring user authentication, product management, shopping cart functionality, payment integration with Stripe, order tracking, and an admin dashboard. Built with modern technologies and following best practices for scalability and security.',
       tech: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Tailwind CSS'],
       media: [
-        { type: 'video', src: '/placeholder.mp4', thumbnail: '/placeholder.svg' },
+        { type: 'video', src: '/src/assets/videos/ecommerce-demo.mp4', thumbnail: '/placeholder.svg' },
         { type: 'image', src: '/placeholder.svg' },
         { type: 'image', src: '/placeholder.svg' }
       ],
@@ -28,7 +44,7 @@ const Projects = () => {
       longDescription: 'A collaborative task management application with real-time synchronization, drag-and-drop functionality, team collaboration features, file attachments, and detailed analytics. Perfect for teams looking to improve their productivity and workflow management.',
       tech: ['React', 'Socket.io', 'Express', 'PostgreSQL'],
       media: [
-        { type: 'video', src: '/placeholder.mp4', thumbnail: '/placeholder.svg' },
+        { type: 'video', src: '/src/assets/videos/task-management-demo.mp4', thumbnail: '/placeholder.svg' },
         { type: 'image', src: '/placeholder.svg' },
         { type: 'image', src: '/placeholder.svg' }
       ],
@@ -42,7 +58,7 @@ const Projects = () => {
       longDescription: 'A comprehensive weather dashboard providing current conditions, 7-day forecasts, interactive maps, weather alerts, and historical data. Features a beautiful, responsive design with smooth animations and intuitive user experience.',
       tech: ['React', 'OpenWeather API', 'Chart.js', 'CSS3'],
       media: [
-        { type: 'video', src: '/placeholder.mp4', thumbnail: '/placeholder.svg' },
+        { type: 'video', src: '/src/assets/videos/weather-demo.mp4', thumbnail: '/placeholder.svg' },
         { type: 'image', src: '/placeholder.svg' }
       ],
       github: 'https://github.com',
@@ -55,7 +71,7 @@ const Projects = () => {
       longDescription: 'A stunning personal portfolio website showcasing projects, skills, and experience. Features smooth scrolling, animated elements, dark/light mode toggle, contact form, and fully responsive design. Built with attention to detail and performance optimization.',
       tech: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
       media: [
-        { type: 'video', src: '/placeholder.mp4', thumbnail: '/placeholder.svg' },
+        { type: 'video', src: '/src/assets/videos/portfolio-demo.mp4', thumbnail: '/placeholder.svg' },
         { type: 'image', src: '/placeholder.svg' }
       ],
       github: 'https://github.com',
@@ -91,111 +107,7 @@ const Projects = () => {
     );
   };
 
-  const renderMediaItem = (media: any, index: number) => {
-    if (media.type === 'video') {
-      return (
-        <div className="relative">
-          <video
-            src={media.src}
-            className="w-full h-64 sm:h-80 object-cover rounded-lg"
-            controls
-            poster={media.thumbnail}
-          ></video>
-          <div className="absolute top-2 left-2 bg-black/60 text-white px-2 py-1 rounded-md flex items-center">
-            <FileVideo size={14} className="mr-1" />
-            Video
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <img
-          src={media.src}
-          alt={`Project media ${index}`}
-          className="w-full h-64 sm:h-80 object-cover rounded-lg"
-        />
-      );
-    }
-  };
-
-  const ProjectCard = ({ project, index, featured = false }: { project: any, index: number, featured?: boolean }) => (
-    <div 
-      className={`glass rounded-xl overflow-hidden hover:bg-white/10 transition-all duration-300 hover:scale-105 group cursor-pointer ${
-        featured ? 'lg:col-span-2' : ''
-      }`}
-      onClick={() => openProject(index)}
-    >
-      <div className="relative overflow-hidden">
-        {project.media[0].type === 'video' ? (
-          <div className="relative">
-            <img
-              src={project.media[0].thumbnail}
-              alt={project.title}
-              className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-            />
-            <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-80 group-hover:opacity-100 transition-all duration-300">
-              <Video size={40} className="text-white" />
-            </div>
-          </div>
-        ) : (
-          <img
-            src={project.media[0].src}
-            alt={project.title}
-            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <span className="bg-blue-500/80 text-white px-2 py-1 rounded text-sm font-medium">
-            View Details
-          </span>
-        </div>
-      </div>
-      
-      <div className="p-6">
-        <h3 className="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors duration-300">
-          {project.title}
-        </h3>
-        <p className="text-muted-foreground mb-4 line-clamp-2">
-          {project.description}
-        </p>
-        
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.tech.map((tech: string, i: number) => (
-            <span
-              key={i}
-              className="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-        
-        <div className="flex space-x-4">
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center text-muted-foreground hover:text-foreground transition-colors duration-300"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Github size={16} className="mr-1" />
-            Code
-          </a>
-          <a
-            href={project.live}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center text-muted-foreground hover:text-foreground transition-colors duration-300"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <ExternalLink size={16} className="mr-1" />
-            Live Demo
-          </a>
-        </div>
-      </div>
-    </div>
-  );
+  const selectedProjectData = selectedProject !== null ? projects[selectedProject] : null;
 
   return (
     <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8">
@@ -217,6 +129,7 @@ const Projects = () => {
               project={project}
               index={projects.indexOf(project)}
               featured={true}
+              onClick={openProject}
             />
           ))}
         </div>
@@ -230,98 +143,21 @@ const Projects = () => {
                 key={index + featuredProjects.length}
                 project={project}
                 index={projects.indexOf(project)}
+                onClick={openProject}
               />
             ))}
           </div>
         </div>
 
         {/* Project Modal */}
-        <Dialog open={selectedProject !== null} onOpenChange={() => closeProject()}>
-          <DialogContent className="max-w-4xl glass border border-white/20">
-            {selectedProject !== null && (
-              <div>
-                <button
-                  onClick={closeProject}
-                  className="absolute top-4 right-4 p-2 hover:bg-white/10 rounded-full transition-colors duration-300 z-10"
-                >
-                  <X size={20} />
-                </button>
-
-                <div className="relative mb-6">
-                  {renderMediaItem(projects[selectedProject].media[currentMediaIndex], currentMediaIndex)}
-                  
-                  {projects[selectedProject].media.length > 1 && (
-                    <>
-                      <button
-                        onClick={prevMedia}
-                        className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 bg-black/50 hover:bg-black/70 rounded-full transition-colors duration-300"
-                      >
-                        <ChevronLeft size={20} />
-                      </button>
-                      <button
-                        onClick={nextMedia}
-                        className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 bg-black/50 hover:bg-black/70 rounded-full transition-colors duration-300"
-                      >
-                        <ChevronRight size={20} />
-                      </button>
-                      
-                      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                        {projects[selectedProject].media.map((_, i) => (
-                          <div
-                            key={i}
-                            className={`w-2 h-2 rounded-full ${
-                              i === currentMediaIndex ? 'bg-white' : 'bg-white/40'
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    </>
-                  )}
-                </div>
-
-                <h3 className="text-2xl font-bold mb-4">
-                  {projects[selectedProject].title}
-                </h3>
-                
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  {projects[selectedProject].longDescription}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {projects[selectedProject].tech.map((tech: string, i: number) => (
-                    <span
-                      key={i}
-                      className="text-sm bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                
-                <div className="flex space-x-4">
-                  <a
-                    href={projects[selectedProject].github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors duration-300"
-                  >
-                    <Github size={16} className="mr-2" />
-                    View Code
-                  </a>
-                  <a
-                    href={projects[selectedProject].live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-lg transition-all duration-300"
-                  >
-                    <ExternalLink size={16} className="mr-2" />
-                    Live Demo
-                  </a>
-                </div>
-              </div>
-            )}
-          </DialogContent>
-        </Dialog>
+        <ProjectModal
+          project={selectedProjectData}
+          isOpen={selectedProject !== null}
+          currentMediaIndex={currentMediaIndex}
+          onClose={closeProject}
+          onNextMedia={nextMedia}
+          onPrevMedia={prevMedia}
+        />
       </div>
     </section>
   );
