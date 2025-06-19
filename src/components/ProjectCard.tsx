@@ -32,6 +32,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   featured = false, 
   onClick 
 }) => {
+  const handleVideoPlay = (e: React.MouseEvent<HTMLVideoElement>) => {
+    const video = e.currentTarget;
+    video.currentTime = 0;
+    video.play().catch(() => {
+      // Autoplay failed, which is expected in some browsers
+    });
+  };
+
+  const handleVideoPause = (e: React.MouseEvent<HTMLVideoElement>) => {
+    const video = e.currentTarget;
+    video.pause();
+    video.currentTime = 0;
+  };
+
   return (
     <div 
       className={`glass rounded-xl overflow-hidden hover:bg-white/10 transition-all duration-300 hover:scale-105 group cursor-pointer ${
@@ -48,8 +62,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
               muted
               loop
-              onMouseEnter={(e) => e.currentTarget.play()}
-              onMouseLeave={(e) => e.currentTarget.pause()}
+              playsInline
+              preload="metadata"
+              onMouseEnter={handleVideoPlay}
+              onMouseLeave={handleVideoPause}
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-80 group-hover:opacity-0 transition-all duration-300 pointer-events-none">
               <Video size={40} className="text-white" />
