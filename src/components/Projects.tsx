@@ -30,9 +30,9 @@ const Projects = () => {
       longDescription: 'A comprehensive e-commerce platform featuring user authentication, product management, shopping cart functionality, payment integration with Stripe, order tracking, and an admin dashboard. Built with modern technologies and following best practices for scalability and security.',
       tech: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Tailwind CSS'],
       media: [
-        { type: 'video', src: '/src/assets/videos/ecommerce-demo.mp4', thumbnail: '/placeholder.svg' },
-        { type: 'image', src: '/placeholder.svg' },
-        { type: 'image', src: '/placeholder.svg' }
+        { type: 'video', src: '/src/assets/videos/ecommerce-demo.mp4', thumbnail: '/src/assets/ecommerce-thumbnail.jpg' },
+        { type: 'image', src: '/src/assets/ecommerce-screenshot1.jpg' },
+        { type: 'image', src: '/src/assets/ecommerce-screenshot2.jpg' }
       ],
       github: 'https://github.com',
       live: 'https://example.com',
@@ -44,9 +44,9 @@ const Projects = () => {
       longDescription: 'A collaborative task management application with real-time synchronization, drag-and-drop functionality, team collaboration features, file attachments, and detailed analytics. Perfect for teams looking to improve their productivity and workflow management.',
       tech: ['React', 'Socket.io', 'Express', 'PostgreSQL'],
       media: [
-        { type: 'video', src: '/src/assets/videos/task-management-demo.mp4', thumbnail: '/placeholder.svg' },
-        { type: 'image', src: '/placeholder.svg' },
-        { type: 'image', src: '/placeholder.svg' }
+        { type: 'video', src: '/src/assets/videos/task-management-demo.mp4', thumbnail: '/src/assets/task-management-thumbnail.jpg' },
+        { type: 'image', src: '/src/assets/task-management-screenshot1.jpg' },
+        { type: 'image', src: '/src/assets/task-management-screenshot2.jpg' }
       ],
       github: 'https://github.com',
       live: 'https://example.com',
@@ -58,8 +58,8 @@ const Projects = () => {
       longDescription: 'A comprehensive weather dashboard providing current conditions, 7-day forecasts, interactive maps, weather alerts, and historical data. Features a beautiful, responsive design with smooth animations and intuitive user experience.',
       tech: ['React', 'OpenWeather API', 'Chart.js', 'CSS3'],
       media: [
-        { type: 'video', src: '/src/assets/videos/weather-demo.mp4', thumbnail: '/placeholder.svg' },
-        { type: 'image', src: '/placeholder.svg' }
+        { type: 'video', src: '/src/assets/videos/weather-demo.mp4', thumbnail: '/src/assets/weather-thumbnail.jpg' },
+        { type: 'image', src: '/src/assets/weather-screenshot1.jpg' }
       ],
       github: 'https://github.com',
       live: 'https://example.com',
@@ -71,8 +71,8 @@ const Projects = () => {
       longDescription: 'A stunning personal portfolio website showcasing projects, skills, and experience. Features smooth scrolling, animated elements, dark/light mode toggle, contact form, and fully responsive design. Built with attention to detail and performance optimization.',
       tech: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
       media: [
-        { type: 'video', src: '/src/assets/videos/portfolio-demo.mp4', thumbnail: '/placeholder.svg' },
-        { type: 'image', src: '/placeholder.svg' }
+        { type: 'video', src: '/src/assets/videos/portfolio-demo.mp4', thumbnail: '/src/assets/portfolio-thumbnail.jpg' },
+        { type: 'image', src: '/src/assets/portfolio-screenshot1.jpg' }
       ],
       github: 'https://github.com',
       live: 'https://example.com',
