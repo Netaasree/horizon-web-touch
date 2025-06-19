@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { ExternalLink, Github, Video } from 'lucide-react';
 
 interface MediaItem {
@@ -32,22 +32,67 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   featured = false, 
   onClick 
 }) => {
-  const handleVideoPlay = (e: React.MouseEvent<HTMLVideoElement>) => {
-    const video = e.currentTarget;
-    video.currentTime = 0;
-    video.play().catch(() => {
-      // Autoplay failed, which is expected in some browsers
-    });
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const card = cardRef.current;
+    
+    if (!video || !card || project.media[0].type !== 'video') return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Video is in viewport, enable hover effects
+            card.addEventListener('mouseenter', handleMouseEnter);
+            card.addEventListener('mouseleave', handleMouseLeave);
+          } else {
+            // Video is out of viewport, clean up
+            video.pause();
+            video.currentTime = 0;
+            card.removeEventListener('mouseenter', handleMouseEnter);
+            card.removeEventListener('mouseleave', handleMouseLeave);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(card);
+
+    return () => {
+      observer.disconnect();
+      card.removeEventListener('mouseenter', handleMouseEnter);
+      card.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
+  const handleMouseEnter = () => {
+    const video = videoRef.current;
+    if (video) {
+      video.currentTime = 0;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          console.log('Autoplay prevented by browser');
+        });
+      }
+    }
   };
 
-  const handleVideoPause = (e: React.MouseEvent<HTMLVideoElement>) => {
-    const video = e.currentTarget;
-    video.pause();
-    video.currentTime = 0;
+  const handleMouseLeave = () => {
+    const video = videoRef.current;
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
   };
 
   return (
     <div 
+      ref={cardRef}
       className={`glass rounded-xl overflow-hidden hover:bg-white/10 transition-all duration-300 hover:scale-105 group cursor-pointer ${
         featured ? 'lg:col-span-2' : ''
       }`}
@@ -57,6 +102,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {project.media[0].type === 'video' ? (
           <div className="relative">
             <video
+              ref={videoRef}
               src={project.media[0].src}
               poster={project.media[0].thumbnail}
               className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
@@ -64,8 +110,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               loop
               playsInline
               preload="metadata"
-              onMouseEnter={handleVideoPlay}
-              onMouseLeave={handleVideoPause}
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-80 group-hover:opacity-0 transition-all duration-300 pointer-events-none">
               <Video size={40} className="text-white" />
