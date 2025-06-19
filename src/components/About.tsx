@@ -52,7 +52,7 @@ const About = () => {
             About Me
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Passionate developer with a love for creating amazing digital experiences
+            Passionate developer and want to create some amazing projects
           </p>
         </div>
 
@@ -91,17 +91,17 @@ const About = () => {
 
           <div className="animate-slide-in-right">
             <h3 className="text-3xl font-bold mb-6">
-              Hello! I'm John, a passionate developer
+              Hello! I'm Bhimaraju Netaasree,
             </h3>
             <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-              With over 5 years of experience in web development, I specialize in creating
-              modern, responsive, and user-friendly applications. I'm passionate about
-              clean code, innovative solutions, and continuous learning.
+              Currently I am pursuing my BTech degreee in NRIIT university.I specialize 
+              in creating modern, responsive, and user-friendly applications. I'm passionate 
+              about clean code, innovative solutions, and continuous learning.
             </p>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
               When I'm not coding, you can find me exploring new technologies,
               contributing to open-source projects, or sharing knowledge with the
-              developer community.
+              other develpers.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-6">

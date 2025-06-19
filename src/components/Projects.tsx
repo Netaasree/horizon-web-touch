@@ -53,16 +53,16 @@ const Projects = () => {
       featured: true,
     },
     {
-      title: 'Weather Dashboard',
-      description: 'Beautiful weather app with forecasts and location-based data',
-      longDescription: 'A comprehensive weather dashboard providing current conditions, 7-day forecasts, interactive maps, weather alerts, and historical data. Features a beautiful, responsive design with smooth animations and intuitive user experience.',
-      tech: ['React', 'OpenWeather API', 'Chart.js', 'CSS3'],
+      title: 'Diary writing app',
+      description: 'Share your thoughts and experiences with a beautiful diary app',
+      longDescription:'A personal diary writing app that allows users to write and upload their daily experiences and thoughts.',
+      tech: ['Python', 'Flask', 'Gunicorn', 'MongoDB','Render'],
       media: [
-        { type: 'video', src: '/src/assets/videos/weather-demo.mp4', thumbnail: '/src/assets/weather-thumbnail.jpg' },
-        { type: 'image', src: '/src/assets/weather-screenshot1.jpg' }
+        { type: 'video', src: '/src/assets/videos/diary2.mp4', thumbnail: '/placeholder.svg' },
+        { type: 'image', src: '/placeholder.svg' }
       ],
-      github: 'https://github.com',
-      live: 'https://example.com',
+      github: 'https://github.com/Netaasree/deployement.git',
+      live: 'https://deployement-4chj.onrender.com/',
       featured: false,
     },
     {
@@ -74,7 +74,7 @@ const Projects = () => {
         { type: 'video', src: '/src/assets/videos/portfolio-demo.mp4', thumbnail: '/src/assets/portfolio-thumbnail.jpg' },
         { type: 'image', src: '/src/assets/portfolio-screenshot1.jpg' }
       ],
-      github: 'https://github.com',
+      github: 'https://github.com/Netaasree/horizon-web-touch.git',
       live: 'https://example.com',
       featured: false,
     },
