@@ -59,7 +59,7 @@ const Projects = () => {
       tech: ['Python', 'Flask', 'Gunicorn', 'MongoDB','Render'],
       media: [
         { type: 'video', src: '/src/assets/videos/diary2.mp4', thumbnail: '/placeholder.svg' },
-        { type: 'image', src: '/placeholder.svg' }
+        { type: 'image', src: '/src/assets/images/diaryimg.png',thumbnail:'/placeholder.svg' }
       ],
       github: 'https://github.com/Netaasree/deployement.git',
       live: 'https://deployement-4chj.onrender.com/',
@@ -72,7 +72,7 @@ const Projects = () => {
       tech: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
       media: [
         { type: 'video', src: '/src/assets/videos/portfolio-demo.mp4', thumbnail: '/src/assets/portfolio-thumbnail.jpg' },
-        { type: 'image', src: '/src/assets/portfolio-screenshot1.jpg' }
+        { type: 'image', src: '/src/assets/images/portfolioimg.png' }
       ],
       github: 'https://github.com/Netaasree/horizon-web-touch.git',
       live: 'https://example.com',

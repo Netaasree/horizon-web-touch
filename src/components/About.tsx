@@ -63,7 +63,7 @@ const About = () => {
               <div className="relative glass rounded-3xl p-8 group-hover:bg-white/15 transition-all duration-500">
                 <div className="w-72 h-72 mx-auto bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-full flex items-center justify-center text-8xl font-bold text-white relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
                    <img 
-                   src="https://i.ibb.co/VcLF56WV/netaasree.jpg"  
+                   src='/src/assets/images/netaimg.jpg' 
                    alt="Profile" 
                    className="relative z-10 w-32 h-32 object-cover rounded-full"
                    />
