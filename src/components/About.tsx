@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Code, Lightbulb, Users, Award, Sparkles, FileText, Download } from 'lucide-react';
 import { Button } from './ui/button';
@@ -70,23 +69,17 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="animate-slide-in-left">
             <div className="relative group">
-              {/* Enhanced gradient background with multiple layers */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/40 via-purple-500/40 to-pink-500/40 rounded-3xl blur-3xl transform rotate-6 group-hover:rotate-12 transition-transform duration-500 animate-pulse-slow"></div>
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/30 via-violet-500/30 to-fuchsia-500/30 rounded-3xl blur-2xl transform -rotate-3 group-hover:-rotate-6 transition-transform duration-700 opacity-70"></div>
+              {/* Simplified background without disco effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-500"></div>
               
-              <div className="relative glass rounded-3xl p-8 group-hover:bg-white/15 transition-all duration-500 border-2 border-transparent group-hover:border-gradient-to-r group-hover:from-blue-400/50 group-hover:via-purple-400/50 group-hover:to-pink-400/50 group-hover:shadow-2xl group-hover:shadow-purple-500/30">
-                <div className="w-72 h-72 mx-auto rounded-full flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
-                  {/* Image container with hover border effect */}
-                  <div className="absolute inset-0 rounded-full p-2">
-                    {/* Glowing border that appears on hover */}
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse p-1">
-                      <div className="w-full h-full bg-background rounded-full"></div>
-                    </div>
-                    {/* Static border */}
-                    <div className="relative w-full h-full bg-white/10 rounded-full p-1">
-                      <div className="w-full h-full bg-background/50 rounded-full flex items-center justify-center overflow-hidden">
+              <div className="relative glass rounded-3xl p-8 group-hover:bg-white/15 transition-all duration-500">
+                <div className="w-72 h-72 mx-auto rounded-full flex items-center justify-center relative overflow-hidden">
+                  {/* Simple border with hover glow effect - no overlay on image */}
+                  <div className="absolute inset-0 rounded-full">
+                    <div className="w-full h-full rounded-full p-1 bg-gradient-to-r from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/80 group-hover:via-purple-500/80 group-hover:to-pink-500/80 transition-all duration-500">
+                      <div className="w-full h-full bg-background rounded-full p-1">
                         <img 
-                          src='/src/assets/images/netaimg.jpg' 
+                          src='/netaimg.jpg' 
                           alt="Profile" 
                           className="w-full h-full object-cover rounded-full"
                         />
@@ -102,14 +95,14 @@ const About = () => {
               <Button variant="outline" className="gap-2 group hover:bg-blue-500/20 transition-all duration-300 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 to-blue-500/0 group-hover:from-blue-500/10 group-hover:to-transparent transition-all duration-300"></div>
                 <FileText className="w-5 h-5 group-hover:text-blue-400 transition-colors duration-300 relative z-10" />
-                <a href="/src/assets/resume.pdf" target="_blank" rel="noopener noreferrer" className="group-hover:text-blue-400 transition-colors duration-300 relative z-10">
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="group-hover:text-blue-400 transition-colors duration-300 relative z-10">
                   View Resume
                 </a>
               </Button>
               <Button variant="outline" className="gap-2 group hover:bg-purple-500/20 transition-all duration-300 hover:border-purple-400/50 hover:shadow-lg hover:shadow-purple-500/25 hover:scale-105 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-300"></div>
                 <Download className="w-5 h-5 group-hover:text-purple-400 transition-colors duration-300 relative z-10" />
-                <a href="/src/assets/resume.pdf" download className="group-hover:text-purple-400 transition-colors duration-300 relative z-10">
+                <a href="/resume.pdf" download className="group-hover:text-purple-400 transition-colors duration-300 relative z-10">
                   Download Resume
                 </a>
               </Button>

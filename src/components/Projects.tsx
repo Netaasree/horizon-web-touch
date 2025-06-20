@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import ProjectCard from './ProjectCard';
 import ProjectModal from './ProjectModal';
@@ -30,9 +31,9 @@ const Projects = () => {
       longDescription: 'A comprehensive e-commerce platform featuring user authentication, product management, shopping cart functionality, payment integration with Stripe, order tracking, and an admin dashboard. Built with modern technologies and following best practices for scalability and security.',
       tech: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Tailwind CSS'],
       media: [
-        { type: 'video', src: '/src/assets/videos/ecommerce-demo.mp4', thumbnail: '/src/assets/ecommerce-thumbnail.jpg' },
-        { type: 'image', src: '/src/assets/ecommerce-screenshot1.jpg' },
-        { type: 'image', src: '/src/assets/ecommerce-screenshot2.jpg' }
+        { type: 'video', src: '/videos/ecommerce-demo.mp4', thumbnail: '/images/ecommerce-thumbnail.jpg' },
+        { type: 'image', src: '/images/ecommerce-screenshot1.jpg' },
+        { type: 'image', src: '/images/ecommerce-screenshot2.jpg' }
       ],
       github: 'https://github.com',
       live: 'https://example.com',
@@ -44,9 +45,9 @@ const Projects = () => {
       longDescription: 'A collaborative task management application with real-time synchronization, drag-and-drop functionality, team collaboration features, file attachments, and detailed analytics. Perfect for teams looking to improve their productivity and workflow management.',
       tech: ['React', 'Socket.io', 'Express', 'PostgreSQL'],
       media: [
-        { type: 'video', src: '/src/assets/videos/task-management-demo.mp4', thumbnail: '/src/assets/task-management-thumbnail.jpg' },
-        { type: 'image', src: '/src/assets/task-management-screenshot1.jpg' },
-        { type: 'image', src: '/src/assets/task-management-screenshot2.jpg' }
+        { type: 'video', src: '/videos/task-management-demo.mp4', thumbnail: '/images/task-management-thumbnail.jpg' },
+        { type: 'image', src: '/images/task-management-screenshot1.jpg' },
+        { type: 'image', src: '/images/task-management-screenshot2.jpg' }
       ],
       github: 'https://github.com',
       live: 'https://example.com',
@@ -58,8 +59,8 @@ const Projects = () => {
       longDescription:'A personal diary writing app that allows users to write and upload their daily experiences and thoughts.',
       tech: ['Python', 'Flask', 'Gunicorn', 'MongoDB','Render'],
       media: [
-        { type: 'video', src: '/src/assets/videos/diary2.mp4', thumbnail: '/placeholder.svg' },
-        { type: 'image', src: '/src/assets/images/diaryimg.png',thumbnail:'/placeholder.svg' }
+        { type: 'video', src: '/videos/diary2.mp4', thumbnail: '/placeholder.svg' },
+        { type: 'image', src: '/images/diaryimg.png', thumbnail:'/placeholder.svg' }
       ],
       github: 'https://github.com/Netaasree/deployement.git',
       live: 'https://deployement-4chj.onrender.com/',
@@ -71,8 +72,8 @@ const Projects = () => {
       longDescription: 'A stunning personal portfolio website showcasing projects, skills, and experience. Features smooth scrolling, animated elements, dark/light mode toggle, contact form, and fully responsive design. Built with attention to detail and performance optimization.',
       tech: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
       media: [
-        { type: 'video', src: '/src/assets/videos/portfolio-demo.mp4', thumbnail: '/src/assets/portfolio-thumbnail.jpg' },
-        { type: 'image', src: '/src/assets/images/portfolioimg.png' }
+        { type: 'video', src: '/videos/portfolio-demo.mp4', thumbnail: '/images/portfolio-thumbnail.jpg' },
+        { type: 'image', src: '/images/portfolioimg.png' }
       ],
       github: 'https://github.com/Netaasree/horizon-web-touch.git',
       live: 'https://example.com',
