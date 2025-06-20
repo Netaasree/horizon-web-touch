@@ -95,14 +95,14 @@ const About = () => {
               <Button variant="outline" className="gap-2 group hover:bg-blue-500/20 transition-all duration-300 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 to-blue-500/0 group-hover:from-blue-500/10 group-hover:to-transparent transition-all duration-300"></div>
                 <FileText className="w-5 h-5 group-hover:text-blue-400 transition-colors duration-300 relative z-10" />
-                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="group-hover:text-blue-400 transition-colors duration-300 relative z-10">
+                <a href="/public/resume.pdf" target="_blank" rel="noopener noreferrer" className="group-hover:text-blue-400 transition-colors duration-300 relative z-10">
                   View Resume
                 </a>
               </Button>
               <Button variant="outline" className="gap-2 group hover:bg-purple-500/20 transition-all duration-300 hover:border-purple-400/50 hover:shadow-lg hover:shadow-purple-500/25 hover:scale-105 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-300"></div>
                 <Download className="w-5 h-5 group-hover:text-purple-400 transition-colors duration-300 relative z-10" />
-                <a href="/resume.pdf" download className="group-hover:text-purple-400 transition-colors duration-300 relative z-10">
+                <a href="/public/resume.pdf" download className="group-hover:text-purple-400 transition-colors duration-300 relative z-10">
                   Download Resume
                 </a>
               </Button>
