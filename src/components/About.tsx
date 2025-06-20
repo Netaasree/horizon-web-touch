@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Code, Lightbulb, Users, Award, Sparkles, FileText, Download } from 'lucide-react';
 import { Button } from './ui/button';
