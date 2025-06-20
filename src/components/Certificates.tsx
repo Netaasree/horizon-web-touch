@@ -105,7 +105,10 @@ const Certificates = () => {
           <h3 className="text-2xl font-bold mb-8 text-center">Professional Certificates</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {certificates.map((cert, index) => (
-              <div key={index} className="glass rounded-xl overflow-hidden hover:bg-white/10 transition-all duration-300 group">
+              <div key={index} className="glass rounded-xl overflow-hidden hover:bg-white/10 transition-all duration-300 group hover:scale-105 hover:-translate-y-2 relative hover:border-2 hover:border-gradient-to-r hover:from-blue-400/60 hover:via-purple-400/60 hover:to-pink-400/60 hover:shadow-2xl hover:shadow-blue-500/30">
+                {/* Animated border gradient */}
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/20 group-hover:via-purple-500/20 group-hover:to-pink-500/20 transition-all duration-500 opacity-0 group-hover:opacity-100 animate-pulse"></div>
+                
                 {/* Certificate Image */}
                 {cert.image && (
                   <div className="relative overflow-hidden">
@@ -122,9 +125,9 @@ const Certificates = () => {
                   </div>
                 )}
                 
-                <div className="p-6">
+                <div className="p-6 relative z-10">
                   <div className="flex items-start justify-between mb-4">
-                    <Award className="text-blue-400 group-hover:text-blue-300 transition-colors duration-300" size={32} />
+                    <Award className="text-blue-400 group-hover:text-blue-300 transition-colors duration-300 group-hover:scale-110" size={32} />
                     <span className="text-sm text-muted-foreground flex items-center">
                       <Calendar size={14} className="mr-1" />
                       {cert.date}
@@ -135,7 +138,7 @@ const Certificates = () => {
                     {cert.title}
                   </h4>
                   
-                  <p className="text-blue-300 font-medium mb-3">{cert.organization}</p>
+                  <p className="text-blue-300 font-medium mb-3 group-hover:text-blue-200 transition-colors duration-300">{cert.organization}</p>
                   
                   <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
                     {cert.description}
@@ -145,7 +148,7 @@ const Certificates = () => {
                     {cert.skills.map((skill, i) => (
                       <span
                         key={i}
-                        className="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded"
+                        className="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded group-hover:bg-blue-500/30 group-hover:text-blue-200 transition-all duration-300"
                       >
                         {skill}
                       </span>
@@ -157,7 +160,7 @@ const Certificates = () => {
                       href={cert.credentialUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-300 text-sm"
+                      className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-300 text-sm hover:underline"
                     >
                       <ExternalLink size={14} className="mr-1" />
                       View Credential
@@ -174,7 +177,10 @@ const Certificates = () => {
           <h3 className="text-2xl font-bold mb-8 text-center">Notable Achievements</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {achievements.map((achievement, index) => (
-              <div key={index} className="glass rounded-xl overflow-hidden hover:bg-white/10 transition-all duration-300 group">
+              <div key={index} className="glass rounded-xl overflow-hidden hover:bg-white/10 transition-all duration-300 group hover:scale-105 hover:-translate-y-2 relative hover:border-2 hover:border-gradient-to-r hover:from-purple-400/60 hover:via-pink-400/60 hover:to-orange-400/60 hover:shadow-2xl hover:shadow-purple-500/30">
+                {/* Animated border gradient */}
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500/0 via-pink-500/0 to-orange-500/0 group-hover:from-purple-500/20 group-hover:via-pink-500/20 group-hover:to-orange-500/20 transition-all duration-500 opacity-0 group-hover:opacity-100 animate-pulse"></div>
+                
                 {/* Achievement Image */}
                 {achievement.image && (
                   <div className="relative overflow-hidden">
@@ -189,17 +195,17 @@ const Certificates = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                     <div className="absolute top-4 left-4">
-                      <span className="text-3xl bg-black/50 p-2 rounded-full">
+                      <span className="text-3xl bg-black/50 p-2 rounded-full group-hover:scale-110 transition-transform duration-300">
                         {getAchievementIcon(achievement.type)}
                       </span>
                     </div>
                   </div>
                 )}
                 
-                <div className="p-6">
+                <div className="p-6 relative z-10">
                   {!achievement.image && (
                     <div className="flex items-start justify-between mb-4">
-                      <span className="text-3xl">{getAchievementIcon(achievement.type)}</span>
+                      <span className="text-3xl group-hover:scale-110 transition-transform duration-300">{getAchievementIcon(achievement.type)}</span>
                       <span className="text-sm text-muted-foreground flex items-center">
                         <Calendar size={14} className="mr-1" />
                         {achievement.date}
