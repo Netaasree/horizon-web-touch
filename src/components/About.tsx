@@ -79,7 +79,7 @@ const About = () => {
                     <div className="w-full h-full rounded-full p-1 bg-gradient-to-r from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/80 group-hover:via-purple-500/80 group-hover:to-pink-500/80 transition-all duration-500">
                       <div className="w-full h-full bg-background rounded-full p-1">
                         <img 
-                          src='/netaimg.jpg' 
+                          src='/images/netaimg.jpg' 
                           alt="Profile" 
                           className="w-full h-full object-cover rounded-full"
                         />
