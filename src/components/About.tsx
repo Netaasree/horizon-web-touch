@@ -65,9 +65,9 @@ const About = () => {
               
               <div className="relative glass rounded-3xl p-8 group-hover:bg-white/15 transition-all duration-500 border-2 border-transparent group-hover:border-gradient-to-r group-hover:from-blue-400/50 group-hover:via-purple-400/50 group-hover:to-pink-400/50">
                 <div className="w-72 h-72 mx-auto rounded-full flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-500">
-                  {/* Enhanced circular gradient background */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 rounded-full p-1 animate-pulse-slow">
-                    <div className="w-full h-full bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-full flex items-center justify-center">
+                  {/* Simple border without gradient effects */}
+                  <div className="absolute inset-0 bg-white/10 rounded-full p-1">
+                    <div className="w-full h-full bg-background/50 rounded-full flex items-center justify-center">
                       <img 
                         src='/src/assets/images/netaimg.jpg' 
                         alt="Profile" 
@@ -75,8 +75,6 @@ const About = () => {
                       />
                     </div>
                   </div>
-                  {/* Animated glow effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-400/30 via-purple-400/30 to-pink-400/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full animate-pulse"></div>
                 </div>
               </div>
             </div>
