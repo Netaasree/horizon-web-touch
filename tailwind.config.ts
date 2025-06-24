@@ -68,6 +68,22 @@ export default {
 					400: 'hsl(var(--lightblue-400))',
 					500: 'hsl(var(--lightblue-500))',
 					600: 'hsl(var(--lightblue-600))'
+				},
+				purple: {
+					400: 'hsl(var(--purple-400))',
+					500: 'hsl(var(--purple-500))'
+				},
+				pink: {
+					400: 'hsl(var(--pink-400))',
+					500: 'hsl(var(--pink-500))'
+				},
+				orange: {
+					400: 'hsl(var(--orange-400))',
+					500: 'hsl(var(--orange-500))'
+				},
+				green: {
+					400: 'hsl(var(--green-400))',
+					500: 'hsl(var(--green-500))'
 				}
 			},
 			borderRadius: {

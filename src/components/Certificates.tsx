@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Award, ExternalLink, Calendar, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Button } from './ui/button';
@@ -26,7 +26,8 @@ interface Achievement {
 
 const Certificates = () => {
   const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFullScreenOpen, setIsFullScreenOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const certificates: Certificate[] = [
     {
@@ -36,7 +37,7 @@ const Certificates = () => {
       description: 'Demonstrated expertise in designing distributed systems on AWS',
       credentialUrl: 'https://aws.amazon.com',
       credentialId: 'AWS-CSA-2024-001234',
-      skills: ['AWS', 'Cloud Architecture', 'System Design'],
+      skills: ['AWS', 'Cloud Architecture', 'System Design', 'EC2', 'S3', 'Lambda'],
       image: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=300&fit=crop'
     },
     {
@@ -46,7 +47,7 @@ const Certificates = () => {
       description: 'Advanced React development and best practices',
       credentialUrl: 'https://developers.facebook.com',
       credentialId: 'META-REACT-2023-567890',
-      skills: ['React', 'JavaScript', 'Frontend Development'],
+      skills: ['React', 'JavaScript', 'Frontend Development', 'Redux', 'Hooks'],
       image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=300&fit=crop'
     },
     {
@@ -56,7 +57,7 @@ const Certificates = () => {
       description: 'Comprehensive full-stack development bootcamp',
       credentialUrl: 'https://freecodecamp.org',
       credentialId: 'FCC-FULLSTACK-2023-112233',
-      skills: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'MongoDB'],
+      skills: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'MongoDB', 'Express'],
       image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop'
     },
     {
@@ -66,8 +67,18 @@ const Certificates = () => {
       description: 'Professional cloud architect certification',
       credentialUrl: 'https://cloud.google.com',
       credentialId: 'GCP-PROF-2024-445566',
-      skills: ['Google Cloud', 'Kubernetes', 'DevOps'],
+      skills: ['Google Cloud', 'Kubernetes', 'DevOps', 'Docker', 'Terraform'],
       image: 'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=400&h=300&fit=crop'
+    },
+    {
+      title: 'Azure DevOps Engineer',
+      organization: 'Microsoft',
+      date: '2024',
+      description: 'Expert-level Azure DevOps and CI/CD practices',
+      credentialUrl: 'https://azure.microsoft.com',
+      credentialId: 'AZ-DEVOPS-2024-778899',
+      skills: ['Azure', 'DevOps', 'CI/CD', 'PowerShell', 'ARM Templates'],
+      image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop'
     }
   ];
 
@@ -95,14 +106,27 @@ const Certificates = () => {
     }
   ];
 
-  const openCertificate = (certificate: Certificate) => {
+  const openFullScreen = (certificate: Certificate, index: number) => {
     setSelectedCertificate(certificate);
-    setIsModalOpen(true);
+    setCurrentIndex(index);
+    setIsFullScreenOpen(true);
   };
 
-  const closeCertificate = () => {
+  const closeFullScreen = () => {
     setSelectedCertificate(null);
-    setIsModalOpen(false);
+    setIsFullScreenOpen(false);
+  };
+
+  const nextCertificate = () => {
+    const nextIndex = (currentIndex + 1) % certificates.length;
+    setCurrentIndex(nextIndex);
+    setSelectedCertificate(certificates[nextIndex]);
+  };
+
+  const prevCertificate = () => {
+    const prevIndex = (currentIndex - 1 + certificates.length) % certificates.length;
+    setCurrentIndex(prevIndex);
+    setSelectedCertificate(certificates[prevIndex]);
   };
 
   const getAchievementIcon = (type: Achievement['type']) => {
@@ -118,11 +142,29 @@ const Certificates = () => {
     }
   };
 
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (isFullScreenOpen) {
+        if (event.key === 'Escape') {
+          closeFullScreen();
+        } else if (event.key === 'ArrowLeft') {
+          prevCertificate();
+        } else if (event.key === 'ArrowRight') {
+          nextCertificate();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isFullScreenOpen, currentIndex]);
+
   return (
     <section id="certificates" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gradient-lightblue">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gradient animate-sparkle-dance">
             Certificates & Achievements
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -130,172 +172,285 @@ const Certificates = () => {
           </p>
         </div>
 
-        {/* Certificates Carousel */}
+        {/* Certificates Section */}
         <div className="mb-16">
-          <h3 className="text-2xl font-bold mb-8 text-center text-lightblue-400">Professional Certificates</h3>
-          <div className="relative">
-            <Carousel className="w-full max-w-5xl mx-auto">
-              <CarouselContent className="-ml-2 md:-ml-4">
-                {certificates.map((cert, index) => (
-                  <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                    <div 
-                      className="glass rounded-xl overflow-hidden hover:bg-white/10 transition-all duration-300 group hover:scale-105 hover:-translate-y-2 cursor-pointer relative hover:border-2 hover:border-lightblue-400/60 hover:shadow-2xl hover:shadow-lightblue-500/30"
-                      onClick={() => openCertificate(cert)}
-                    >
-                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-lightblue-500/0 via-sky-500/0 to-cyan-500/0 group-hover:from-lightblue-500/20 group-hover:via-sky-500/20 group-hover:to-cyan-500/20 transition-all duration-500 opacity-0 group-hover:opacity-100 animate-pulse"></div>
-                      
-                      <div className="relative overflow-hidden">
-                        <img
-                          src={cert.image}
-                          alt={`${cert.title} Certificate`}
-                          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                      </div>
-                      
-                      <div className="p-6 relative z-10">
-                        <div className="flex items-start justify-between mb-4">
-                          <Award className="text-lightblue-400 group-hover:text-lightblue-300 transition-colors duration-300 group-hover:scale-110" size={32} />
-                          <span className="text-sm text-muted-foreground flex items-center">
-                            <Calendar size={14} className="mr-1" />
-                            {cert.date}
-                          </span>
-                        </div>
-                        
-                        <h4 className="text-xl font-bold mb-2 group-hover:text-lightblue-400 transition-colors duration-300">
-                          {cert.title}
+          <h3 className="text-2xl font-bold mb-8 text-center text-gradient-lightblue">Professional Certificates</h3>
+          
+          {/* Centered Certificate Display */}
+          <div className="flex justify-center items-center mb-8">
+            <div className="relative w-full max-w-4xl">
+              <div className="flex items-center justify-center space-x-8">
+                {/* Previous Certificate (Faded) */}
+                <div className="hidden lg:block opacity-30 scale-75 transition-all duration-500">
+                  {certificates[(currentIndex - 1 + certificates.length) % certificates.length] && (
+                    <div className="certificate-card glass-vibrant rounded-xl overflow-hidden w-80 h-96">
+                      <img
+                        src={certificates[(currentIndex - 1 + certificates.length) % certificates.length].image}
+                        alt="Previous Certificate"
+                        className="w-full h-48 object-cover"
+                      />
+                      <div className="p-4">
+                        <h4 className="text-lg font-semibold text-white mb-2">
+                          {certificates[(currentIndex - 1 + certificates.length) % certificates.length].title}
                         </h4>
-                        
-                        <p className="text-lightblue-300 font-medium mb-3 group-hover:text-lightblue-200 transition-colors duration-300">{cert.organization}</p>
-                        
-                        <p className="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-3">
-                          {cert.description}
+                        <p className="text-sm text-gray-300">
+                          {certificates[(currentIndex - 1 + certificates.length) % certificates.length].organization}
                         </p>
-                        
-                        <div className="flex flex-wrap gap-2">
-                          {cert.skills.slice(0, 3).map((skill, i) => (
-                            <span
-                              key={i}
-                              className="text-xs bg-lightblue-500/20 text-lightblue-300 px-2 py-1 rounded group-hover:bg-lightblue-500/30 group-hover:text-lightblue-200 transition-all duration-300"
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                          {cert.skills.length > 3 && (
-                            <span className="text-xs text-lightblue-400">+{cert.skills.length - 3} more</span>
-                          )}
-                        </div>
                       </div>
                     </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="hidden md:flex -left-12 border-lightblue-400/50 text-lightblue-400 hover:bg-lightblue-500/20 hover:border-lightblue-300" />
-              <CarouselNext className="hidden md:flex -right-12 border-lightblue-400/50 text-lightblue-400 hover:bg-lightblue-500/20 hover:border-lightblue-300" />
-            </Carousel>
-          </div>
-        </div>
+                  )}
+                </div>
 
-        {/* Certificate Modal */}
-        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto glass border-lightblue-400/30">
-            {selectedCertificate && (
-              <>
-                <DialogHeader>
-                  <DialogTitle className="text-2xl font-bold text-lightblue-400 mb-4">
-                    {selectedCertificate.title}
-                  </DialogTitle>
-                </DialogHeader>
-                
-                <div className="space-y-6">
-                  <div className="relative overflow-hidden rounded-lg">
+                {/* Main Certificate (Center) */}
+                <div className="certificate-card glass-vibrant rounded-xl overflow-hidden w-96 h-[28rem] neon-glow-multi hover-glow cursor-pointer transform transition-all duration-500 hover:scale-105"
+                     onClick={() => openFullScreen(certificates[currentIndex], currentIndex)}>
+                  <div className="relative">
                     <img
-                      src={selectedCertificate.image}
-                      alt={`${selectedCertificate.title} Certificate`}
-                      className="w-full h-64 object-cover"
+                      src={certificates[currentIndex].image}
+                      alt={certificates[currentIndex].title}
+                      className="w-full h-56 object-cover"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <Award className="text-yellow-400 mb-2 animate-pulse" size={24} />
+                    </div>
                   </div>
                   
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <p className="text-lightblue-300 font-medium text-lg">{selectedCertificate.organization}</p>
-                      <span className="text-muted-foreground flex items-center">
-                        <Calendar size={16} className="mr-2" />
-                        {selectedCertificate.date}
-                      </span>
-                    </div>
+                  <div className="p-6 bg-gradient-vibrant">
+                    <h4 className="text-xl font-bold mb-2 text-gradient">
+                      {certificates[currentIndex].title}
+                    </h4>
                     
-                    {selectedCertificate.credentialId && (
-                      <div className="bg-lightblue-500/10 p-3 rounded-lg">
-                        <p className="text-sm text-muted-foreground">Credential ID:</p>
-                        <p className="text-lightblue-300 font-mono">{selectedCertificate.credentialId}</p>
-                      </div>
-                    )}
-                    
-                    <p className="text-muted-foreground leading-relaxed">
-                      {selectedCertificate.description}
+                    <p className="text-lightblue-300 font-medium mb-2">
+                      {certificates[currentIndex].organization}
                     </p>
                     
-                    {selectedCertificate.credentialUrl && (
-                      <a
-                        href={selectedCertificate.credentialUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center text-lightblue-400 hover:text-lightblue-300 transition-colors duration-300 hover:underline"
-                      >
-                        <ExternalLink size={16} className="mr-2" />
-                        View Credential
-                      </a>
-                    )}
-                  </div>
-                  
-                  <div>
-                    <h4 className="text-lg font-semibold mb-3 text-lightblue-400">Skills Acquired</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedCertificate.skills.map((skill, i) => (
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm text-muted-foreground flex items-center">
+                        <Calendar size={14} className="mr-1" />
+                        {certificates[currentIndex].date}
+                      </span>
+                    </div>
+
+                    <div className="mb-3">
+                      <p className="text-xs text-gray-400 mb-1">Credential ID:</p>
+                      <p className="text-sm font-mono text-lightblue-300">
+                        {certificates[currentIndex].credentialId}
+                      </p>
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-1">
+                      {certificates[currentIndex].skills.slice(0, 3).map((skill, i) => (
                         <span
                           key={i}
-                          className="bg-lightblue-500/20 text-lightblue-300 px-3 py-1 rounded-full text-sm"
+                          className="text-xs bg-lightblue-500/20 text-lightblue-300 px-2 py-1 rounded-full animate-pulse-slow"
                         >
                           {skill}
                         </span>
                       ))}
+                      {certificates[currentIndex].skills.length > 3 && (
+                        <span className="text-xs text-lightblue-400">
+                          +{certificates[currentIndex].skills.length - 3} more
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
-              </>
-            )}
-          </DialogContent>
-        </Dialog>
+
+                {/* Next Certificate (Faded) */}
+                <div className="hidden lg:block opacity-30 scale-75 transition-all duration-500">
+                  {certificates[(currentIndex + 1) % certificates.length] && (
+                    <div className="certificate-card glass-vibrant rounded-xl overflow-hidden w-80 h-96">
+                      <img
+                        src={certificates[(currentIndex + 1) % certificates.length].image}
+                        alt="Next Certificate"
+                        className="w-full h-48 object-cover"
+                      />
+                      <div className="p-4">
+                        <h4 className="text-lg font-semibold text-white mb-2">
+                          {certificates[(currentIndex + 1) % certificates.length].title}
+                        </h4>
+                        <p className="text-sm text-gray-300">
+                          {certificates[(currentIndex + 1) % certificates.length].organization}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Navigation Buttons */}
+              <button
+                onClick={() => {
+                  const prevIndex = (currentIndex - 1 + certificates.length) % certificates.length;
+                  setCurrentIndex(prevIndex);
+                }}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-lightblue-500 to-purple-500 text-white p-3 rounded-full hover:from-lightblue-400 hover:to-purple-400 transition-all duration-300 neon-glow z-10"
+              >
+                <ChevronLeft size={24} />
+              </button>
+              
+              <button
+                onClick={() => {
+                  const nextIndex = (currentIndex + 1) % certificates.length;
+                  setCurrentIndex(nextIndex);
+                }}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-full hover:from-purple-400 hover:to-pink-400 transition-all duration-300 neon-glow z-10"
+              >
+                <ChevronRight size={24} />
+              </button>
+            </div>
+          </div>
+
+          {/* Certificate Indicators */}
+          <div className="flex justify-center space-x-2 mb-8">
+            {certificates.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentIndex 
+                    ? 'bg-gradient-to-r from-lightblue-500 to-purple-500 scale-125 neon-glow' 
+                    : 'bg-gray-600 hover:bg-gray-500'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Full Screen Certificate Modal */}
+        {isFullScreenOpen && selectedCertificate && (
+          <div className="fullscreen-modal" onClick={closeFullScreen}>
+            <div className="certificate-preview" onClick={(e) => e.stopPropagation()}>
+              <div className="flex justify-between items-start mb-6">
+                <h2 className="text-3xl font-bold text-gradient">{selectedCertificate.title}</h2>
+                <button
+                  onClick={closeFullScreen}
+                  className="text-gray-400 hover:text-white transition-colors p-2"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <img
+                    src={selectedCertificate.image}
+                    alt={selectedCertificate.title}
+                    className="w-full h-80 object-cover rounded-lg neon-glow"
+                  />
+                </div>
+                
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-xl font-semibold text-lightblue-400 mb-2">Organization</h3>
+                    <p className="text-lg text-gray-300">{selectedCertificate.organization}</p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold text-lightblue-400 mb-2">Date Earned</h3>
+                    <p className="text-lg text-gray-300">{selectedCertificate.date}</p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold text-lightblue-400 mb-2">Credential ID</h3>
+                    <p className="text-lg font-mono text-gray-300 bg-gray-800/50 p-3 rounded-lg">
+                      {selectedCertificate.credentialId}
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold text-lightblue-400 mb-2">Description</h3>
+                    <p className="text-gray-300 leading-relaxed">{selectedCertificate.description}</p>
+                  </div>
+                  
+                  {selectedCertificate.credentialUrl && (
+                    <a
+                      href={selectedCertificate.credentialUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-lightblue-400 hover:text-lightblue-300 transition-colors font-medium"
+                    >
+                      <ExternalLink size={20} className="mr-2" />
+                      View Credential
+                    </a>
+                  )}
+                </div>
+              </div>
+              
+              <div className="mt-8">
+                <h3 className="text-xl font-semibold text-lightblue-400 mb-4">Skills Acquired</h3>
+                <div className="flex flex-wrap gap-3">
+                  {selectedCertificate.skills.map((skill, i) => (
+                    <span
+                      key={i}
+                      className="bg-gradient-to-r from-lightblue-500/20 to-purple-500/20 text-lightblue-300 px-4 py-2 rounded-full border border-lightblue-400/30 hover:border-lightblue-400/60 transition-all duration-300"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Navigation in full screen */}
+              <div className="flex justify-between items-center mt-8">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    prevCertificate();
+                  }}
+                  className="bg-gradient-to-r from-lightblue-500 to-purple-500 text-white px-6 py-3 rounded-lg hover:from-lightblue-400 hover:to-purple-400 transition-all duration-300 flex items-center"
+                >
+                  <ChevronLeft size={20} className="mr-2" />
+                  Previous
+                </button>
+                
+                <span className="text-gray-400">
+                  {currentIndex + 1} of {certificates.length}
+                </span>
+                
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    nextCertificate();
+                  }}
+                  className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-lg hover:from-purple-400 hover:to-pink-400 transition-all duration-300 flex items-center"
+                >
+                  Next
+                  <ChevronRight size={20} className="ml-2" />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Achievements */}
         <div>
-          <h3 className="text-2xl font-bold mb-8 text-center text-lightblue-400">Notable Achievements</h3>
+          <h3 className="text-2xl font-bold mb-8 text-center text-gradient-lightblue">Notable Achievements</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {achievements.map((achievement, index) => (
-              <div key={index} className="glass rounded-xl overflow-hidden hover:bg-white/10 transition-all duration-300 group hover:scale-105 hover:-translate-y-2 relative hover:border-2 hover:border-lightblue-400/60 hover:shadow-2xl hover:shadow-lightblue-500/30">
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-lightblue-500/0 via-sky-500/0 to-cyan-500/0 group-hover:from-lightblue-500/20 group-hover:via-sky-500/20 group-hover:to-cyan-500/20 transition-all duration-500 opacity-0 group-hover:opacity-100 animate-pulse"></div>
-                
+              <div key={index} className="glass-vibrant rounded-xl overflow-hidden hover-glow cursor-pointer certificate-card animate-float" 
+                   style={{ animationDelay: `${index * 0.2}s` }}>
                 {achievement.image && (
                   <div className="relative overflow-hidden">
                     <img
                       src={achievement.image}
-                      alt={`${achievement.title} Achievement`}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      alt={achievement.title}
+                      className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute top-4 left-4">
-                      <span className="text-3xl bg-black/50 p-2 rounded-full group-hover:scale-110 transition-transform duration-300">
+                      <span className="text-3xl bg-black/50 p-2 rounded-full animate-sparkle-dance">
                         {getAchievementIcon(achievement.type)}
                       </span>
                     </div>
                   </div>
                 )}
                 
-                <div className="p-6 relative z-10">
+                <div className="p-6 bg-gradient-vibrant">
                   {!achievement.image && (
                     <div className="flex items-start justify-between mb-4">
-                      <span className="text-3xl group-hover:scale-110 transition-transform duration-300">{getAchievementIcon(achievement.type)}</span>
+                      <span className="text-3xl animate-sparkle-dance">{getAchievementIcon(achievement.type)}</span>
                       <span className="text-sm text-muted-foreground flex items-center">
                         <Calendar size={14} className="mr-1" />
                         {achievement.date}
@@ -312,7 +467,7 @@ const Certificates = () => {
                     </div>
                   )}
                   
-                  <h4 className="text-lg font-bold mb-2 group-hover:text-lightblue-400 transition-colors duration-300">
+                  <h4 className="text-lg font-bold mb-2 text-gradient">
                     {achievement.title}
                   </h4>
                   
