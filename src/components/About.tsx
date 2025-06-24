@@ -69,22 +69,16 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="animate-slide-in-left">
             <div className="relative group">
-              {/* Simplified background without disco effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-3xl blur-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-500"></div>
               
               <div className="relative glass rounded-3xl p-8 group-hover:bg-white/15 transition-all duration-500">
                 <div className="w-72 h-72 mx-auto rounded-full flex items-center justify-center relative overflow-hidden">
-                  {/* Simple border with hover glow effect - no overlay on image */}
-                  <div className="absolute inset-0 rounded-full">
-                    <div className="w-full h-full rounded-full p-1 bg-gradient-to-r from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/80 group-hover:via-purple-500/80 group-hover:to-pink-500/80 transition-all duration-500">
-                      <div className="w-full h-full bg-background rounded-full p-1">
-                        <img 
-                          src='/images/netaimg.jpg' 
-                          alt="Profile" 
-                          className="w-full h-full object-cover rounded-full"
-                        />
-                      </div>
-                    </div>
+                  <div className="absolute inset-0 rounded-full border-4 border-transparent group-hover:border-blue-500/50 group-hover:shadow-lg group-hover:shadow-blue-500/25 transition-all duration-500">
+                    <img 
+                      src='/images/netaimg.jpg' 
+                      alt="Profile" 
+                      className="w-full h-full object-cover rounded-full"
+                    />
                   </div>
                 </div>
               </div>
@@ -95,14 +89,14 @@ const About = () => {
               <Button variant="outline" className="gap-2 group hover:bg-blue-500/20 transition-all duration-300 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 to-blue-500/0 group-hover:from-blue-500/10 group-hover:to-transparent transition-all duration-300"></div>
                 <FileText className="w-5 h-5 group-hover:text-blue-400 transition-colors duration-300 relative z-10" />
-                <a href="/public/resume.pdf" target="_blank" rel="noopener noreferrer" className="group-hover:text-blue-400 transition-colors duration-300 relative z-10">
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="group-hover:text-blue-400 transition-colors duration-300 relative z-10">
                   View Resume
                 </a>
               </Button>
               <Button variant="outline" className="gap-2 group hover:bg-purple-500/20 transition-all duration-300 hover:border-purple-400/50 hover:shadow-lg hover:shadow-purple-500/25 hover:scale-105 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-transparent transition-all duration-300"></div>
                 <Download className="w-5 h-5 group-hover:text-purple-400 transition-colors duration-300 relative z-10" />
-                <a href="/public/resume.pdf" download className="group-hover:text-purple-400 transition-colors duration-300 relative z-10">
+                <a href="/resume.pdf" download className="group-hover:text-purple-400 transition-colors duration-300 relative z-10">
                   Download Resume
                 </a>
               </Button>
