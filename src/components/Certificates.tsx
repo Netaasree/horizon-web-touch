@@ -25,6 +25,7 @@ const Certificates = () => {
   const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
   const [isFullScreenOpen, setIsFullScreenOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const certificates: Certificate[] = [
     {
@@ -115,18 +116,26 @@ const Certificates = () => {
   };
 
   const nextCertificate = () => {
-    if (currentIndex < certificates.length - 1) {
-      const nextIndex = currentIndex + 1;
-      setCurrentIndex(nextIndex);
-      setSelectedCertificate(certificates[nextIndex]);
+    if (currentIndex < certificates.length - 1 && !isTransitioning) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        const nextIndex = currentIndex + 1;
+        setCurrentIndex(nextIndex);
+        setSelectedCertificate(certificates[nextIndex]);
+        setIsTransitioning(false);
+      }, 150);
     }
   };
 
   const prevCertificate = () => {
-    if (currentIndex > 0) {
-      const prevIndex = currentIndex - 1;
-      setCurrentIndex(prevIndex);
-      setSelectedCertificate(certificates[prevIndex]);
+    if (currentIndex > 0 && !isTransitioning) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        const prevIndex = currentIndex - 1;
+        setCurrentIndex(prevIndex);
+        setSelectedCertificate(certificates[prevIndex]);
+        setIsTransitioning(false);
+      }, 150);
     }
   };
 
@@ -165,7 +174,7 @@ const Certificates = () => {
     <section id="certificates" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gradient animate-sparkle-dance">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-gradient">
             Certificates & Achievements
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -180,7 +189,7 @@ const Certificates = () => {
           {/* Stable Certificate Display */}
           <div className="flex justify-center items-center mb-8">
             <div className="relative w-full max-w-6xl">
-              <div className="flex items-center justify-center space-x-4">
+              <div className={`flex items-center justify-center space-x-4 transition-all duration-500 ${isTransitioning ? 'opacity-50' : 'opacity-100'}`}>
                 {/* Previous Certificate (Faded) */}
                 {currentIndex > 0 && (
                   <div className="hidden lg:block opacity-30 scale-75 transition-all duration-500">
@@ -301,8 +310,9 @@ const Certificates = () => {
               {/* Navigation Buttons */}
               {currentIndex > 0 && (
                 <button
-                  onClick={() => setCurrentIndex(currentIndex - 1)}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-500 to-purple-500 text-white p-3 rounded-full hover:from-blue-400 hover:to-purple-400 transition-all duration-300 neon-glow z-10"
+                  onClick={prevCertificate}
+                  disabled={isTransitioning}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-500 to-purple-500 text-white p-3 rounded-full hover:from-blue-400 hover:to-purple-400 transition-all duration-300 neon-glow z-10 disabled:opacity-50"
                 >
                   <ChevronLeft size={24} />
                 </button>
@@ -310,8 +320,9 @@ const Certificates = () => {
               
               {currentIndex < certificates.length - 1 && (
                 <button
-                  onClick={() => setCurrentIndex(currentIndex + 1)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-full hover:from-purple-400 hover:to-pink-400 transition-all duration-300 neon-glow z-10"
+                  onClick={nextCertificate}
+                  disabled={isTransitioning}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-full hover:from-purple-400 hover:to-pink-400 transition-all duration-300 neon-glow z-10 disabled:opacity-50"
                 >
                   <ChevronRight size={24} />
                 </button>
@@ -324,7 +335,15 @@ const Certificates = () => {
             {certificates.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentIndex(index)}
+                onClick={() => {
+                  if (!isTransitioning) {
+                    setIsTransitioning(true);
+                    setTimeout(() => {
+                      setCurrentIndex(index);
+                      setIsTransitioning(false);
+                    }, 150);
+                  }
+                }}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   index === currentIndex 
                     ? 'bg-gradient-to-r from-blue-500 to-purple-500 scale-125 neon-glow' 
