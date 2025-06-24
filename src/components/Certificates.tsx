@@ -1,9 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { Award, ExternalLink, Calendar, X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
-import { Button } from './ui/button';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
 
 interface Certificate {
   title: string;
@@ -38,7 +35,7 @@ const Certificates = () => {
       credentialUrl: 'https://aws.amazon.com',
       credentialId: 'AWS-CSA-2024-001234',
       skills: ['AWS', 'Cloud Architecture', 'System Design', 'EC2', 'S3', 'Lambda'],
-      image: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=300&fit=crop'
+      image: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=600&h=400&fit=crop'
     },
     {
       title: 'React Developer Certification',
@@ -48,7 +45,7 @@ const Certificates = () => {
       credentialUrl: 'https://developers.facebook.com',
       credentialId: 'META-REACT-2023-567890',
       skills: ['React', 'JavaScript', 'Frontend Development', 'Redux', 'Hooks'],
-      image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=300&fit=crop'
+      image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=400&fit=crop'
     },
     {
       title: 'Full Stack Web Development',
@@ -58,7 +55,7 @@ const Certificates = () => {
       credentialUrl: 'https://freecodecamp.org',
       credentialId: 'FCC-FULLSTACK-2023-112233',
       skills: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'MongoDB', 'Express'],
-      image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop'
+      image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop'
     },
     {
       title: 'Google Cloud Professional',
@@ -68,7 +65,7 @@ const Certificates = () => {
       credentialUrl: 'https://cloud.google.com',
       credentialId: 'GCP-PROF-2024-445566',
       skills: ['Google Cloud', 'Kubernetes', 'DevOps', 'Docker', 'Terraform'],
-      image: 'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=400&h=300&fit=crop'
+      image: 'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=600&h=400&fit=crop'
     },
     {
       title: 'Azure DevOps Engineer',
@@ -78,7 +75,7 @@ const Certificates = () => {
       credentialUrl: 'https://azure.microsoft.com',
       credentialId: 'AZ-DEVOPS-2024-778899',
       skills: ['Azure', 'DevOps', 'CI/CD', 'PowerShell', 'ARM Templates'],
-      image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop'
+      image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop'
     }
   ];
 
@@ -118,15 +115,19 @@ const Certificates = () => {
   };
 
   const nextCertificate = () => {
-    const nextIndex = (currentIndex + 1) % certificates.length;
-    setCurrentIndex(nextIndex);
-    setSelectedCertificate(certificates[nextIndex]);
+    if (currentIndex < certificates.length - 1) {
+      const nextIndex = currentIndex + 1;
+      setCurrentIndex(nextIndex);
+      setSelectedCertificate(certificates[nextIndex]);
+    }
   };
 
   const prevCertificate = () => {
-    const prevIndex = (currentIndex - 1 + certificates.length) % certificates.length;
-    setCurrentIndex(prevIndex);
-    setSelectedCertificate(certificates[prevIndex]);
+    if (currentIndex > 0) {
+      const prevIndex = currentIndex - 1;
+      setCurrentIndex(prevIndex);
+      setSelectedCertificate(certificates[prevIndex]);
+    }
   };
 
   const getAchievementIcon = (type: Achievement['type']) => {
@@ -176,39 +177,49 @@ const Certificates = () => {
         <div className="mb-16">
           <h3 className="text-2xl font-bold mb-8 text-center text-gradient-lightblue">Professional Certificates</h3>
           
-          {/* Centered Certificate Display */}
+          {/* Stable Certificate Display */}
           <div className="flex justify-center items-center mb-8">
-            <div className="relative w-full max-w-4xl">
-              <div className="flex items-center justify-center space-x-8">
+            <div className="relative w-full max-w-6xl">
+              <div className="flex items-center justify-center space-x-4">
                 {/* Previous Certificate (Faded) */}
-                <div className="hidden lg:block opacity-30 scale-75 transition-all duration-500">
-                  {certificates[(currentIndex - 1 + certificates.length) % certificates.length] && (
-                    <div className="certificate-card glass-vibrant rounded-xl overflow-hidden w-80 h-96">
+                {currentIndex > 0 && (
+                  <div className="hidden lg:block opacity-30 scale-75 transition-all duration-500">
+                    <div className="certificate-card glass-vibrant rounded-xl overflow-hidden w-80 h-[32rem]">
                       <img
-                        src={certificates[(currentIndex - 1 + certificates.length) % certificates.length].image}
+                        src={certificates[currentIndex - 1].image}
                         alt="Previous Certificate"
-                        className="w-full h-48 object-cover"
+                        className="w-full h-56 object-cover"
                       />
                       <div className="p-4">
-                        <h4 className="text-lg font-semibold text-white mb-2">
-                          {certificates[(currentIndex - 1 + certificates.length) % certificates.length].title}
+                        <h4 className="text-lg font-semibold text-white mb-2 line-clamp-2">
+                          {certificates[currentIndex - 1].title}
                         </h4>
-                        <p className="text-sm text-gray-300">
-                          {certificates[(currentIndex - 1 + certificates.length) % certificates.length].organization}
+                        <p className="text-sm text-gray-300 mb-2">
+                          {certificates[currentIndex - 1].organization}
                         </p>
+                        <p className="text-xs text-gray-400 mb-2">
+                          ID: {certificates[currentIndex - 1].credentialId}
+                        </p>
+                        <div className="flex flex-wrap gap-1">
+                          {certificates[currentIndex - 1].skills.slice(0, 2).map((skill, i) => (
+                            <span key={i} className="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
 
-                {/* Main Certificate (Center) */}
-                <div className="certificate-card glass-vibrant rounded-xl overflow-hidden w-96 h-[28rem] neon-glow-multi hover-glow cursor-pointer transform transition-all duration-500 hover:scale-105"
+                {/* Main Certificate (Center) - Full Photo Display */}
+                <div className="certificate-card glass-vibrant rounded-xl overflow-hidden w-96 h-[36rem] neon-glow-multi hover-glow cursor-pointer transform transition-all duration-500 hover:scale-105"
                      onClick={() => openFullScreen(certificates[currentIndex], currentIndex)}>
                   <div className="relative">
                     <img
                       src={certificates[currentIndex].image}
                       alt={certificates[currentIndex].title}
-                      className="w-full h-56 object-cover"
+                      className="w-full h-64 object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4">
@@ -221,7 +232,7 @@ const Certificates = () => {
                       {certificates[currentIndex].title}
                     </h4>
                     
-                    <p className="text-lightblue-300 font-medium mb-2">
+                    <p className="text-blue-300 font-medium mb-2">
                       {certificates[currentIndex].organization}
                     </p>
                     
@@ -232,73 +243,79 @@ const Certificates = () => {
                       </span>
                     </div>
 
-                    <div className="mb-3">
+                    <div className="mb-4">
                       <p className="text-xs text-gray-400 mb-1">Credential ID:</p>
-                      <p className="text-sm font-mono text-lightblue-300">
+                      <p className="text-sm font-mono text-blue-300 bg-black/20 p-2 rounded">
                         {certificates[currentIndex].credentialId}
                       </p>
                     </div>
                     
-                    <div className="flex flex-wrap gap-1">
-                      {certificates[currentIndex].skills.slice(0, 3).map((skill, i) => (
-                        <span
-                          key={i}
-                          className="text-xs bg-lightblue-500/20 text-lightblue-300 px-2 py-1 rounded-full animate-pulse-slow"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                      {certificates[currentIndex].skills.length > 3 && (
-                        <span className="text-xs text-lightblue-400">
-                          +{certificates[currentIndex].skills.length - 3} more
-                        </span>
-                      )}
+                    <div className="mb-2">
+                      <p className="text-xs text-gray-400 mb-2">Skills Acquired:</p>
+                      <div className="flex flex-wrap gap-1">
+                        {certificates[currentIndex].skills.map((skill, i) => (
+                          <span
+                            key={i}
+                            className="text-xs bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full animate-pulse-slow"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Next Certificate (Faded) */}
-                <div className="hidden lg:block opacity-30 scale-75 transition-all duration-500">
-                  {certificates[(currentIndex + 1) % certificates.length] && (
-                    <div className="certificate-card glass-vibrant rounded-xl overflow-hidden w-80 h-96">
+                {currentIndex < certificates.length - 1 && (
+                  <div className="hidden lg:block opacity-30 scale-75 transition-all duration-500">
+                    <div className="certificate-card glass-vibrant rounded-xl overflow-hidden w-80 h-[32rem]">
                       <img
-                        src={certificates[(currentIndex + 1) % certificates.length].image}
+                        src={certificates[currentIndex + 1].image}
                         alt="Next Certificate"
-                        className="w-full h-48 object-cover"
+                        className="w-full h-56 object-cover"
                       />
                       <div className="p-4">
-                        <h4 className="text-lg font-semibold text-white mb-2">
-                          {certificates[(currentIndex + 1) % certificates.length].title}
+                        <h4 className="text-lg font-semibold text-white mb-2 line-clamp-2">
+                          {certificates[currentIndex + 1].title}
                         </h4>
-                        <p className="text-sm text-gray-300">
-                          {certificates[(currentIndex + 1) % certificates.length].organization}
+                        <p className="text-sm text-gray-300 mb-2">
+                          {certificates[currentIndex + 1].organization}
                         </p>
+                        <p className="text-xs text-gray-400 mb-2">
+                          ID: {certificates[currentIndex + 1].credentialId}
+                        </p>
+                        <div className="flex flex-wrap gap-1">
+                          {certificates[currentIndex + 1].skills.slice(0, 2).map((skill, i) => (
+                            <span key={i} className="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full">
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
 
               {/* Navigation Buttons */}
-              <button
-                onClick={() => {
-                  const prevIndex = (currentIndex - 1 + certificates.length) % certificates.length;
-                  setCurrentIndex(prevIndex);
-                }}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-lightblue-500 to-purple-500 text-white p-3 rounded-full hover:from-lightblue-400 hover:to-purple-400 transition-all duration-300 neon-glow z-10"
-              >
-                <ChevronLeft size={24} />
-              </button>
+              {currentIndex > 0 && (
+                <button
+                  onClick={() => setCurrentIndex(currentIndex - 1)}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-500 to-purple-500 text-white p-3 rounded-full hover:from-blue-400 hover:to-purple-400 transition-all duration-300 neon-glow z-10"
+                >
+                  <ChevronLeft size={24} />
+                </button>
+              )}
               
-              <button
-                onClick={() => {
-                  const nextIndex = (currentIndex + 1) % certificates.length;
-                  setCurrentIndex(nextIndex);
-                }}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-full hover:from-purple-400 hover:to-pink-400 transition-all duration-300 neon-glow z-10"
-              >
-                <ChevronRight size={24} />
-              </button>
+              {currentIndex < certificates.length - 1 && (
+                <button
+                  onClick={() => setCurrentIndex(currentIndex + 1)}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-full hover:from-purple-400 hover:to-pink-400 transition-all duration-300 neon-glow z-10"
+                >
+                  <ChevronRight size={24} />
+                </button>
+              )}
             </div>
           </div>
 
@@ -310,7 +327,7 @@ const Certificates = () => {
                 onClick={() => setCurrentIndex(index)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   index === currentIndex 
-                    ? 'bg-gradient-to-r from-lightblue-500 to-purple-500 scale-125 neon-glow' 
+                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 scale-125 neon-glow' 
                     : 'bg-gray-600 hover:bg-gray-500'
                 }`}
               />
@@ -337,30 +354,30 @@ const Certificates = () => {
                   <img
                     src={selectedCertificate.image}
                     alt={selectedCertificate.title}
-                    className="w-full h-80 object-cover rounded-lg neon-glow"
+                    className="w-full h-96 object-cover rounded-lg neon-glow"
                   />
                 </div>
                 
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-xl font-semibold text-lightblue-400 mb-2">Organization</h3>
+                    <h3 className="text-xl font-semibold text-blue-400 mb-2">Organization</h3>
                     <p className="text-lg text-gray-300">{selectedCertificate.organization}</p>
                   </div>
                   
                   <div>
-                    <h3 className="text-xl font-semibold text-lightblue-400 mb-2">Date Earned</h3>
+                    <h3 className="text-xl font-semibold text-blue-400 mb-2">Date Earned</h3>
                     <p className="text-lg text-gray-300">{selectedCertificate.date}</p>
                   </div>
                   
                   <div>
-                    <h3 className="text-xl font-semibold text-lightblue-400 mb-2">Credential ID</h3>
+                    <h3 className="text-xl font-semibold text-blue-400 mb-2">Credential ID</h3>
                     <p className="text-lg font-mono text-gray-300 bg-gray-800/50 p-3 rounded-lg">
                       {selectedCertificate.credentialId}
                     </p>
                   </div>
                   
                   <div>
-                    <h3 className="text-xl font-semibold text-lightblue-400 mb-2">Description</h3>
+                    <h3 className="text-xl font-semibold text-blue-400 mb-2">Description</h3>
                     <p className="text-gray-300 leading-relaxed">{selectedCertificate.description}</p>
                   </div>
                   
@@ -369,7 +386,7 @@ const Certificates = () => {
                       href={selectedCertificate.credentialUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center text-lightblue-400 hover:text-lightblue-300 transition-colors font-medium"
+                      className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors font-medium"
                     >
                       <ExternalLink size={20} className="mr-2" />
                       View Credential
@@ -379,12 +396,12 @@ const Certificates = () => {
               </div>
               
               <div className="mt-8">
-                <h3 className="text-xl font-semibold text-lightblue-400 mb-4">Skills Acquired</h3>
+                <h3 className="text-xl font-semibold text-blue-400 mb-4">Skills Acquired</h3>
                 <div className="flex flex-wrap gap-3">
                   {selectedCertificate.skills.map((skill, i) => (
                     <span
                       key={i}
-                      className="bg-gradient-to-r from-lightblue-500/20 to-purple-500/20 text-lightblue-300 px-4 py-2 rounded-full border border-lightblue-400/30 hover:border-lightblue-400/60 transition-all duration-300"
+                      className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 px-4 py-2 rounded-full border border-blue-400/30 hover:border-blue-400/60 transition-all duration-300"
                     >
                       {skill}
                     </span>
@@ -399,7 +416,8 @@ const Certificates = () => {
                     e.stopPropagation();
                     prevCertificate();
                   }}
-                  className="bg-gradient-to-r from-lightblue-500 to-purple-500 text-white px-6 py-3 rounded-lg hover:from-lightblue-400 hover:to-purple-400 transition-all duration-300 flex items-center"
+                  disabled={currentIndex === 0}
+                  className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-lg hover:from-blue-400 hover:to-purple-400 transition-all duration-300 flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <ChevronLeft size={20} className="mr-2" />
                   Previous
@@ -414,7 +432,8 @@ const Certificates = () => {
                     e.stopPropagation();
                     nextCertificate();
                   }}
-                  className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-lg hover:from-purple-400 hover:to-pink-400 transition-all duration-300 flex items-center"
+                  disabled={currentIndex === certificates.length - 1}
+                  className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-lg hover:from-purple-400 hover:to-pink-400 transition-all duration-300 flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Next
                   <ChevronRight size={20} className="ml-2" />
