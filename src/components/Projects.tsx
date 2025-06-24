@@ -26,16 +26,16 @@ const Projects = () => {
 
   const projects: Project[] = [
     {
-      title: 'E-Commerce Platform',
-      description: 'A full-stack e-commerce solution with React, Node.js, and MongoDB',
-      longDescription: 'A comprehensive e-commerce platform featuring user authentication, product management, shopping cart functionality, payment integration with Stripe, order tracking, and an admin dashboard. Built with modern technologies and following best practices for scalability and security.',
-      tech: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Tailwind CSS'],
+      title: 'Object detection using YOLOv5',
+      description: 'An object detection system using YOLOv5 that processes video input to identify and highlight objects in real-time.',
+      longDescription: 'This project implements real-time object detection on video input using the YOLOv5 deep learning model. It identifies and highlights multiple objects frame-by-frame, providing a visual output with bounding boxes and class labels.',
+      tech: ['Python', 'PyTorch', 'YOLOv5','OpenCV','NumPy','Matplotlib','Torchvision'],
       media: [
         { type: 'video', src: '/videos/ecommerce-demo.mp4', thumbnail: '/images/ecommerce-thumbnail.jpg' },
         { type: 'image', src: '/images/ecommerce-screenshot1.jpg' },
         { type: 'image', src: '/images/ecommerce-screenshot2.jpg' }
       ],
-      github: 'https://github.com',
+      github: 'https://github.com/Netaasree/object-detection-project2.git',
       live: 'https://example.com',
       featured: true,
     },
