@@ -406,12 +406,13 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gradient-to-b from-lightblue-500 via-sky-500 to-cyan-500 rounded-full;
+  background: linear-gradient(to bottom, hsl(var(--lightblue-500)), hsl(var(--sky-500)), hsl(var(--cyan-500)));
+  border-radius: 10px;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply from-lightblue-400 via-sky-400 to-cyan-400;
+  background: linear-gradient(to bottom, hsl(var(--lightblue-400)), hsl(var(--sky-400)), hsl(var(--cyan-400)));
 }
 
 /* Selection styling */
