@@ -41,17 +41,6 @@ const Skills = () => {
         { name: 'Redis', level: 70, color: 'from-red-500 to-red-400' },
         { name: 'Firebase', level: 75, color: 'from-yellow-500 to-orange-500' }
       ]
-    },
-    cloud: {
-      title: 'Cloud & DevOps',
-      icon: <Cloud className="w-6 h-6" />,
-      skills: [
-        { name: 'AWS', level: 80, color: 'from-orange-500 to-orange-400' },
-        { name: 'Google Cloud', level: 75, color: 'from-blue-500 to-blue-400' },
-        { name: 'Docker', level: 80, color: 'from-blue-600 to-blue-500' },
-        { name: 'Kubernetes', level: 70, color: 'from-blue-700 to-blue-600' },
-        { name: 'GitHub Actions', level: 75, color: 'from-gray-600 to-gray-500' }
-      ]
     }
   };
 

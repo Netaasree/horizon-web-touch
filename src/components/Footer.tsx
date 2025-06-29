@@ -6,10 +6,10 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: <Github size={20} />, url: 'https://github.com', name: 'GitHub' },
-    { icon: <Linkedin size={20} />, url: 'https://linkedin.com', name: 'LinkedIn' },
-    { icon: <Twitter size={20} />, url: 'https://twitter.com', name: 'Twitter' },
-    { icon: <Mail size={20} />, url: 'mailto:john@example.com', name: 'Email' },
+    { icon: <Github size={20} />, url: 'https://github.com/Netaasree', name: 'GitHub' },
+    { icon: <Linkedin size={20} />, url: 'https://www.linkedin.com/in/netaasree-bhimaraju-35261826a/', name: 'LinkedIn' },
+    { icon: <Twitter size={20} />, url: 'https://x.com/netaasree', name: 'Twitter' },
+    { icon: <Mail size={20} />, url: 'mailto:bnssrs05@gmail.com', name: 'Email' },
   ];
 
   const quickLinks = [
@@ -26,7 +26,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-8">
           {/* Brand Section */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-gradient">John Doe</h3>
+            <h3 className="text-2xl font-bold text-gradient">Bhimaraju Netaasree</h3>
             <p className="text-muted-foreground leading-relaxed">
               Full Stack Developer passionate about creating amazing digital experiences
               with modern technologies and innovative solutions.
@@ -70,9 +70,9 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="text-lg font-semibold">Get In Touch</h4>
             <div className="space-y-2 text-muted-foreground">
-              <p>john@example.com</p>
+              <p>bnssrs05@gmail.com</p>
               <p>+1 (555) 123-4567</p>
-              <p>New York, NY</p>
+              <p>India</p>
             </div>
             <p className="text-sm text-muted-foreground">
               Always open to interesting conversations and collaboration opportunities.
@@ -83,10 +83,7 @@ const Footer = () => {
         <div className="border-t border-white/10 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-muted-foreground text-sm">
-              © {currentYear} John Doe. All rights reserved.
-            </p>
-            <p className="flex items-center text-muted-foreground text-sm">
-              Made with <Heart size={16} className="mx-1 text-red-500" /> using React & Tailwind CSS
+              © {currentYear} Bhimaraju Netaasree. All rights reserved.
             </p>
           </div>
         </div>

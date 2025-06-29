@@ -42,8 +42,8 @@ const Contact = () => {
     {
       icon: <Mail className="w-6 h-6" />,
       title: 'Email',
-      value: 'john@example.com',
-      link: 'mailto:john@example.com',
+      value: 'bnssrs05@gmail.com',
+      link: 'mailto:bnssrs05@gmail.com',
     },
     {
       icon: <Phone className="w-6 h-6" />,
@@ -54,8 +54,8 @@ const Contact = () => {
     {
       icon: <MapPin className="w-6 h-6" />,
       title: 'Location',
-      value: 'New York, NY',
-      link: 'https://maps.google.com',
+      value: 'India',
+      link: 'https://maps.app.goo.gl/8Y3UNhc6ynDcHDyV8',
     },
   ];
 
@@ -63,17 +63,17 @@ const Contact = () => {
     {
       icon: <Github className="w-6 h-6" />,
       name: 'GitHub',
-      url: 'https://github.com',
+      url: 'https://github.com/Netaasree',
     },
     {
       icon: <Linkedin className="w-6 h-6" />,
       name: 'LinkedIn',
-      url: 'https://linkedin.com',
+      url: 'https://www.linkedin.com/in/netaasree-bhimaraju-35261826a/',
     },
     {
       icon: <Twitter className="w-6 h-6" />,
       name: 'Twitter',
-      url: 'https://twitter.com',
+      url: 'https://x.com/netaasree',
     },
   ];
 
