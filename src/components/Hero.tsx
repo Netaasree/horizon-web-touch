@@ -106,7 +106,7 @@ const Hero = () => {
 
           <div className="flex justify-center space-x-8">
             <a
-              href="https://github.com"
+              href="https://github.com/Netaasree"
               target="_blank"
               rel="noopener noreferrer"
               className="group p-4 glass rounded-full hover:bg-white/20 transition-all duration-300 hover:scale-125 transform relative overflow-hidden"
@@ -116,7 +116,7 @@ const Hero = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent rounded-full transform scale-0 group-hover:scale-150 transition-transform duration-500"></div>
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/netaasree-bhimaraju-35261826a/"
               target="_blank"
               rel="noopener noreferrer"
               className="group p-4 glass rounded-full hover:bg-white/20 transition-all duration-300 hover:scale-125 transform relative overflow-hidden"
@@ -126,7 +126,7 @@ const Hero = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent rounded-full transform scale-0 group-hover:scale-150 transition-transform duration-500"></div>
             </a>
             <a
-              href="mailto:john@example.com"
+              href="mailto:bnssrs05@gmail.com"
               className="group p-4 glass rounded-full hover:bg-white/20 transition-all duration-300 hover:scale-125 transform relative overflow-hidden"
             >
               <Mail size={28} className="group-hover:text-blue-400 transition-colors duration-300 relative z-10" />

@@ -29,78 +29,84 @@ const Certificates = () => {
 
   const certificates: Certificate[] = [
     {
-      title: 'AWS Certified Solutions Architect',
-      organization: 'Amazon Web Services',
+      title: 'Cloud Computing',
+      organization: 'NPTEL',
       date: '2024',
-      description: 'Demonstrated expertise in designing distributed systems on AWS',
-      credentialUrl: 'https://aws.amazon.com',
-      credentialId: 'AWS-CSA-2024-001234',
-      skills: ['AWS', 'Cloud Architecture', 'System Design', 'EC2', 'S3', 'Lambda'],
-      image: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=600&h=400&fit=crop'
+      description: 'I successfully completed the 12-week NPTEL course on Cloud Computing conducted by IIT Kharagpur with an Elite certificate, scoring 71% overall.',
+      credentialUrl: 'https://nptel.ac.in/noc',
+      credentialId: 'NPTEL24CS118S1055701255',
+      skills: ['Virtualization', 'Cloudsecurity', 'Networking', 'Loadbalancing', 'Deployment'],
+      image: '/images/certificates/cloudcomputingcer.jpg'
     },
     {
-      title: 'React Developer Certification',
-      organization: 'Meta',
+      title: 'The Joy of Computing using Python',
+      organization: 'NPTEL',
       date: '2023',
-      description: 'Advanced React development and best practices',
-      credentialUrl: 'https://developers.facebook.com',
-      credentialId: 'META-REACT-2023-567890',
-      skills: ['React', 'JavaScript', 'Frontend Development', 'Redux', 'Hooks'],
-      image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=400&fit=crop'
+      description: 'I successfully completed the 12-week NPTEL course "The Joy of Computing Using Python" conducted by IIT Madras and received an Elite certificate with a score of 69%.',
+      credentialUrl: 'https://nptel.ac.in/noc',
+      credentialId: 'NPTEL23CS10S844983440',
+      skills: ['Programming', 'Debugging', 'Problem-solving', 'Python', 'Logic'],
+      image: '/images/certificates/pythoncer.jpg'
     },
     {
-      title: 'Full Stack Web Development',
-      organization: 'FreeCodeCamp',
+      title: 'OpenCV Bootcamp',
+      organization: 'OpenCV University',
       date: '2023',
-      description: 'Comprehensive full-stack development bootcamp',
-      credentialUrl: 'https://freecodecamp.org',
-      credentialId: 'FCC-FULLSTACK-2023-112233',
-      skills: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'MongoDB', 'Express'],
-      image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop'
+      description: 'Completed the OpenCV Bootcamp with 100% grade, focused on computer vision, image processing, and OpenCV tools.',
+      credentialUrl: 'https://opencv.org/courses/',
+      credentialId: '22KN1A0516',
+      skills: ['OpenCV', 'ComputerVision', 'ImageProcessing', 'Python', 'MachineLearning'],
+      image: '/images/certificates/opencvcer.jpg'
     },
     {
-      title: 'Google Cloud Professional',
-      organization: 'Google Cloud',
-      date: '2024',
-      description: 'Professional cloud architect certification',
-      credentialUrl: 'https://cloud.google.com',
-      credentialId: 'GCP-PROF-2024-445566',
-      skills: ['Google Cloud', 'Kubernetes', 'DevOps', 'Docker', 'Terraform'],
-      image: 'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=600&h=400&fit=crop'
+      title: 'Android App Development Hackathon',
+      organization: 'Techgyan & BITS Pilani, Hyderabad Campus',
+      date: 'February 2025',
+      description: 'Participated in and completed the Android App Development Hackathon demonstrating creativity, innovation, and problem-solving skills.',
+      credentialUrl: 'https://www.bits-pilani.ac.in/hyderabad/',
+      credentialId: '22KN1A0516',
+      skills: ['Android', 'AppDevelopment', 'ProblemSolving', 'Creativity', 'Teamwork'],
+      image: '/images/certificates/bitshackathoncer.jpg'
     },
     {
-      title: 'Azure DevOps Engineer',
-      organization: 'Microsoft',
-      date: '2024',
-      description: 'Expert-level Azure DevOps and CI/CD practices',
-      credentialUrl: 'https://azure.microsoft.com',
-      credentialId: 'AZ-DEVOPS-2024-778899',
-      skills: ['Azure', 'DevOps', 'CI/CD', 'PowerShell', 'ARM Templates'],
-      image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop'
+      title: 'Generative AI Internship',
+      organization: 'Codegnan IT Solutions Pvt Ltd & APSCHE',
+      date: 'May–July 2024',
+      description: 'Completed a 120-hour short-term internship on Generative AI organized by Codegnan IT Solutions in collaboration with APSCHE and JNTU Kakinada.',
+      credentialUrl: 'https://codegnan.com/',
+      credentialId: '22KN1A0516',
+      skills: ['GenerativeAI', 'DeepLearning', 'AIModels', 'PromptEngineering', 'MachineLearning'],
+      image: '/images/certificates/genaicer.jpg'
+    },
+    {
+      title: 'TechTrek Webathon/Hackathon',
+      organization: 'Siddhartha Academy of Higher Education',
+      date: 'January 2025',
+      description: 'Participated in TechTrek – a 24-hour National Level Industry Driven Webathon/Hackathon as part of the Research Conclave 2025 held at Siddhartha Academy, Vijayawada.',
+      credentialUrl: '',
+      credentialId: '22KN1A0516',
+      skills: ['WebDevelopment', 'Hackathon', 'ProblemSolving', 'Teamwork', 'Innovation'],
+      image: '/images/certificates/vrhackathoncer.jpg'
+    },
+    {
+      title: 'Full Stack Hackathon 2K24',
+      organization: 'NRI Institute of Technology & Codegnan IT Solutions',
+      date: 'December 2024',
+      description: 'Participated in Hackathon 2K24 focused on Full Stack Development, organized by the Department of CSE, NRI Institute of Technology in collaboration with Codegnan.',
+      credentialUrl: '',
+      credentialId: '22KN1A0516',
+      skills: ['FullStack', 'WebDevelopment', 'ProblemSolving', 'Collaboration', 'Creativity'],
+      image: '/images/certificates/nrihackthoncer.jpg'
     }
   ];
 
   const achievements: Achievement[] = [
     {
-      title: 'Hackathon Winner',
-      description: 'First place in TechCrunch Disrupt Hackathon 2024',
-      date: '2024',
+      title: 'Bug War - Code Debugging Competition Winner',
+      description: 'Secured 1st place in the Bug War event at SUNRISE 2K25, a national-level technical fest held at NRI Institute of Technology. Awarded a cash prize of ₹1500.',
+      date: 'February 2025',
       type: 'competition',
-      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=300&fit=crop'
-    },
-    {
-      title: 'Open Source Contributor',
-      description: 'Contributed to 50+ open source projects with 1000+ stars',
-      date: '2023-2024',
-      type: 'milestone',
-      image: 'https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=400&h=300&fit=crop'
-    },
-    {
-      title: 'Developer of the Month',
-      description: 'Recognized by company for outstanding performance',
-      date: '2023',
-      type: 'recognition',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop'
+      image: '/images/certificates/bugwarcer.jpeg'   
     }
   ];
 
