@@ -44,39 +44,6 @@ export type Database = {
         }
         Relationships: []
       }
-      todos: {
-        Row: {
-          completed: boolean
-          created_at: string
-          description: string | null
-          due_date: string | null
-          due_time: string
-          id: string
-          title: string
-          user_id: string
-        }
-        Insert: {
-          completed?: boolean
-          created_at?: string
-          description?: string | null
-          due_date?: string | null
-          due_time: string
-          id?: string
-          title: string
-          user_id: string
-        }
-        Update: {
-          completed?: boolean
-          created_at?: string
-          description?: string | null
-          due_date?: string | null
-          due_time?: string
-          id?: string
-          title?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
     }
     Views: {
       [_ in never]: never
