@@ -58,7 +58,7 @@ const Hero = () => {
 
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
         <div className="animate-fade-in-up">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-8 relative">
+          <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 relative">
             <span className="text-gradient relative whitespace-nowrap">
               Bhimaraju Netaasree
               <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-lg blur-xl animate-pulse-slow"></div>
