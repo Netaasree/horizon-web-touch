@@ -73,7 +73,7 @@ const About = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-lightblue-500/20 via-sky-500/20 to-cyan-500/20 rounded-3xl blur-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-500"></div>
               
               <div className="relative glass rounded-3xl p-8 group-hover:bg-white/15 transition-all duration-500">
-                <div className="w-72 h-72 mx-auto rounded-full flex items-center justify-center relative overflow-hidden photo-hover-container">
+                <div className="w-72 h-72 mx-auto rounded-xl flex items-center justify-center relative overflow-hidden photo-hover-container border-4 border-gradient-to-r from-lightblue-400 via-sky-400 to-cyan-400 shadow-2xl shadow-lightblue-500/50">
                   {/* Floating particles on hover */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                     <div className="absolute top-4 left-8 w-2 h-2 bg-lightblue-400 rounded-full animate-float-particle" style={{ animationDelay: '0s' }}></div>
@@ -84,22 +84,28 @@ const About = () => {
                     <div className="absolute bottom-1/3 left-4 w-2 h-2 bg-cyan-300 rounded-full animate-float-particle" style={{ animationDelay: '2.5s' }}></div>
                   </div>
                   
-                  {/* Rotating border effect */}
-                  <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute inset-0 rounded-full border-2 border-transparent bg-gradient-to-r from-lightblue-400 via-sky-400 via-cyan-400 to-lightblue-400 bg-clip-border animate-spin-slow"></div>
-                    <div className="absolute inset-2 rounded-full bg-background"></div>
+                  {/* Rotating border effect for square */}
+                  <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute inset-0 rounded-xl border-2 border-transparent bg-gradient-to-r from-lightblue-400 via-sky-400 via-cyan-400 to-lightblue-400 bg-clip-border animate-spin-slow"></div>
+                    <div className="absolute inset-2 rounded-xl bg-background"></div>
                   </div>
                   
-                  {/* Glowing ring effect */}
-                  <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500">
-                    <div className="absolute inset-0 rounded-full border-4 border-lightblue-400/50 animate-pulse-glow"></div>
-                    <div className="absolute inset-2 rounded-full border-2 border-sky-400/30 animate-pulse-glow" style={{ animationDelay: '0.5s' }}></div>
+                  {/* Glowing ring effect for square */}
+                  <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <div className="absolute inset-0 rounded-xl border-4 border-lightblue-400/50 animate-pulse-glow shadow-lg shadow-lightblue-400/50"></div>
+                    <div className="absolute inset-2 rounded-xl border-2 border-sky-400/30 animate-pulse-glow shadow-md shadow-sky-400/30" style={{ animationDelay: '0.5s' }}></div>
+                  </div>
+
+                  {/* Holographic overlay effect */}
+                  <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-30 transition-opacity duration-700">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-lightblue-400/20 via-transparent via-sky-400/20 to-cyan-400/20 rounded-xl animate-pulse-slow"></div>
+                    <div className="absolute inset-0 bg-gradient-to-bl from-purple-400/10 via-transparent to-pink-400/10 rounded-xl animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
                   </div>
                   
                   <img 
                     src='/images/netaimg.jpg' 
                     alt="Profile" 
-                    className="w-full h-full object-cover rounded-full relative z-10 group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover rounded-xl relative z-10 group-hover:scale-105 transition-transform duration-500 group-hover:brightness-110"
                   />
                 </div>
               </div>

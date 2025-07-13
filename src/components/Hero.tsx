@@ -11,7 +11,7 @@ const Hero = () => {
   ];
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
       {/* Enhanced Animated Background with more effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-purple-900/30 to-pink-900/30"></div>
@@ -58,8 +58,8 @@ const Hero = () => {
 
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
         <div className="animate-fade-in-up">
-          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-8 relative">
-            <span className="text-gradient relative">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-8 relative">
+            <span className="text-gradient relative whitespace-nowrap">
               Bhimaraju Netaasree
               <div className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-lg blur-xl animate-pulse-slow"></div>
               <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/10 via-rose-500/10 to-yellow-500/10 rounded-lg blur-2xl animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
