@@ -23,7 +23,9 @@ interface Achievement {
 
 const Certificates = () => {
   const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
+  const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
   const [isFullScreenOpen, setIsFullScreenOpen] = useState(false);
+  const [isAchievementFullScreen, setIsAchievementFullScreen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -121,6 +123,16 @@ const Certificates = () => {
     setIsFullScreenOpen(false);
   };
 
+  const openAchievementFullScreen = (achievement: Achievement) => {
+    setSelectedAchievement(achievement);
+    setIsAchievementFullScreen(true);
+  };
+
+  const closeAchievementFullScreen = () => {
+    setSelectedAchievement(null);
+    setIsAchievementFullScreen(false);
+  };
+
   const nextCertificate = () => {
     if (currentIndex < certificates.length - 1 && !isTransitioning) {
       setIsTransitioning(true);
@@ -169,12 +181,16 @@ const Certificates = () => {
         } else if (event.key === 'ArrowRight') {
           nextCertificate();
         }
+      } else if (isAchievementFullScreen) {
+        if (event.key === 'Escape') {
+          closeAchievementFullScreen();
+        }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isFullScreenOpen, currentIndex]);
+  }, [isFullScreenOpen, isAchievementFullScreen, currentIndex]);
 
   return (
     <section id="certificates" className="py-20 px-4 sm:px-6 lg:px-8">
@@ -474,7 +490,8 @@ const Certificates = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {achievements.map((achievement, index) => (
               <div key={index} className="glass-vibrant rounded-xl overflow-hidden hover-glow cursor-pointer certificate-card animate-float" 
-                   style={{ animationDelay: `${index * 0.2}s` }}>
+                   style={{ animationDelay: `${index * 0.2}s` }}
+                   onClick={() => openAchievementFullScreen(achievement)}>
                 {achievement.image && (
                   <div className="relative overflow-hidden">
                     <img
@@ -523,6 +540,55 @@ const Certificates = () => {
             ))}
           </div>
         </div>
+
+        {/* Achievement Full Screen Modal */}
+        {isAchievementFullScreen && selectedAchievement && (
+          <div className="fullscreen-modal" onClick={closeAchievementFullScreen}>
+            <div className="certificate-preview" onClick={(e) => e.stopPropagation()}>
+              <div className="flex justify-between items-start mb-6">
+                <h2 className="text-3xl font-bold text-gradient">{selectedAchievement.title}</h2>
+                <button
+                  onClick={closeAchievementFullScreen}
+                  className="text-gray-400 hover:text-white transition-colors p-2"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-8">
+                {selectedAchievement.image && (
+                  <div>
+                    <img
+                      src={selectedAchievement.image}
+                      alt={selectedAchievement.title}
+                      className="w-full h-96 object-cover rounded-lg neon-glow"
+                    />
+                  </div>
+                )}
+                
+                <div className={`space-y-6 ${!selectedAchievement.image ? 'md:col-span-2' : ''}`}>
+                  <div>
+                    <h3 className="text-xl font-semibold text-blue-400 mb-2">Achievement Type</h3>
+                    <p className="text-lg text-gray-300 flex items-center">
+                      <span className="text-2xl mr-2">{getAchievementIcon(selectedAchievement.type)}</span>
+                      {selectedAchievement.type.charAt(0).toUpperCase() + selectedAchievement.type.slice(1)}
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold text-blue-400 mb-2">Date Achieved</h3>
+                    <p className="text-lg text-gray-300">{selectedAchievement.date}</p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold text-blue-400 mb-2">Description</h3>
+                    <p className="text-gray-300 leading-relaxed">{selectedAchievement.description}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

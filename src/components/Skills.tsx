@@ -7,13 +7,24 @@ const Skills = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const skillCategories = {
+    programming: {
+      title: 'Programming Languages',
+      icon: <Code className="w-6 h-6" />,
+      skills: [
+        { name: 'C', level: 85, color: 'from-blue-600 to-blue-500' },
+        { name: 'Python', level: 90, color: 'from-blue-500 to-green-500' },
+        { name: 'Java', level: 80, color: 'from-orange-600 to-red-500' },
+        { name: 'HTML', level: 95, color: 'from-orange-500 to-orange-400' },
+        { name: 'CSS', level: 90, color: 'from-blue-500 to-blue-400' },
+        { name: 'JavaScript', level: 95, color: 'from-yellow-500 to-yellow-400' }
+      ]
+    },
     frontend: {
       title: 'Frontend Development',
       icon: <Code className="w-6 h-6" />,
       skills: [
         { name: 'React', level: 95, color: 'from-blue-500 to-cyan-500' },
         { name: 'TypeScript', level: 90, color: 'from-blue-600 to-blue-400' },
-        { name: 'JavaScript', level: 95, color: 'from-yellow-500 to-yellow-400' },
         { name: 'CSS/Tailwind', level: 90, color: 'from-purple-500 to-pink-500' },
         { name: 'Vue.js', level: 75, color: 'from-green-500 to-green-400' },
         { name: 'Next.js', level: 85, color: 'from-gray-600 to-gray-400' }
@@ -24,7 +35,6 @@ const Skills = () => {
       icon: <Server className="w-6 h-6" />,
       skills: [
         { name: 'Node.js', level: 85, color: 'from-green-500 to-green-400' },
-        { name: 'Python', level: 80, color: 'from-blue-500 to-green-500' },
         { name: 'Express.js', level: 85, color: 'from-gray-600 to-gray-500' },
         { name: 'Django', level: 75, color: 'from-green-600 to-green-500' },
         { name: 'FastAPI', level: 70, color: 'from-teal-500 to-teal-400' },
