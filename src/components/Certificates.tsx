@@ -104,8 +104,8 @@ const Certificates = () => {
 
   const achievements: Achievement[] = [
     {
-      title: 'Bug War - Code Debugging Competition Winner',
-      description: 'Secured 1st place in the Bug War event at SUNRISE 2K25, a national-level technical fest held at NRI Institute of Technology. Awarded a cash prize of ₹1500.',
+      title: 'Code Sankalp - Code Debugging Competition Winner',
+      description: 'Secured 1st place in the Code Sankalp event at SUNRISE 2K25, a national-level technical fest held at NRI Institute of Technology. Awarded a cash prize of ₹1500.',
       date: 'February 2025',
       type: 'competition',
       image: '/images/certificates/bugwarcer.jpeg'   
