@@ -14,8 +14,8 @@ interface Project {
   longDescription: string;
   tech: string[];
   media: MediaItem[];
-  github: string;
-  live: string;
+  github?: string;
+  live?: string;
   featured: boolean;
 }
 
@@ -196,30 +196,34 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
         
         <div className="flex space-x-4">
-          <motion.a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center text-muted-foreground"
-            onClick={(e) => e.stopPropagation()}
-            whileHover={{ scale: 1.1, color: 'rgb(96, 165, 250)' }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Github size={16} className="mr-1" />
-            Code
-          </motion.a>
-          <motion.a
-            href={project.live}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center text-muted-foreground"
-            onClick={(e) => e.stopPropagation()}
-            whileHover={{ scale: 1.1, color: 'rgb(168, 85, 247)' }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <ExternalLink size={16} className="mr-1" />
-            Live Demo
-          </motion.a>
+          {project.github && (
+            <motion.a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-muted-foreground"
+              onClick={(e) => e.stopPropagation()}
+              whileHover={{ scale: 1.1, color: 'rgb(96, 165, 250)' }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Github size={16} className="mr-1" />
+              Code
+            </motion.a>
+          )}
+          {project.live && (
+            <motion.a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-muted-foreground"
+              onClick={(e) => e.stopPropagation()}
+              whileHover={{ scale: 1.1, color: 'rgb(168, 85, 247)' }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <ExternalLink size={16} className="mr-1" />
+              Live Demo
+            </motion.a>
+          )}
         </div>
       </div>
     </motion.div>

@@ -32,7 +32,7 @@ const Counter = ({ to, suffix = '+' }: { to: number; suffix?: string }) => {
 
 const About = () => {
   const stats = [
-    { value: 8, label: 'Projects' },
+    { value: 4, label: 'Projects' },
     { value: 4, label: 'Years Coding' },
     { value: 15, label: 'Technologies' },
   ];
