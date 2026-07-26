@@ -82,24 +82,28 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
             </div>
             
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors duration-300 text-sm sm:text-base"
-              >
-                <Github size={16} className="mr-2" />
-                View Code
-              </a>
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-lg transition-all duration-300 text-sm sm:text-base"
-              >
-                <ExternalLink size={16} className="mr-2" />
-                Live Demo
-              </a>
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors duration-300 text-sm sm:text-base"
+                >
+                  <Github size={16} className="mr-2" />
+                  View Code
+                </a>
+              )}
+              {project.live && (
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-lg transition-all duration-300 text-sm sm:text-base"
+                >
+                  <ExternalLink size={16} className="mr-2" />
+                  Live Demo
+                </a>
+              )}
             </div>
           </div>
         </div>
