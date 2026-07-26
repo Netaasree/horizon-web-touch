@@ -1,257 +1,137 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, Sparkles, Star, Zap } from 'lucide-react';
+import { Github, Linkedin, Mail, Download, ArrowRight } from 'lucide-react';
 import TypingEffect from './TypingEffect';
 
 const Hero = () => {
-  const roles = [
-    'Full Stack Developer',
-    'AI/ML Engineer',
-    'Problem Solver',
-  ];
+  const roles = ['Full Stack Developer', 'Problem Solver', 'AI Enthusiast'];
 
-  const containerVariants = {
+  const container = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.3,
-      },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } },
   };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 100,
-        damping: 15,
-      },
-    },
-  };
-
-  const floatingVariants = {
-    animate: {
-      y: [-20, 20, -20],
-      rotate: [0, 5, -5, 0],
-      transition: {
-        duration: 6,
-        repeat: Infinity,
-        ease: 'easeInOut' as const,
-      },
-    },
+  const item = {
+    hidden: { opacity: 0, y: 24 },
+    visible: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 90, damping: 16 } },
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-      {/* Enhanced Animated Background */}
-      <div className="absolute inset-0">
-        <motion.div 
-          className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-purple-900/30 to-pink-900/30"
-          animate={{
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        
-        {/* Animated orbs with parallax effect */}
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-24 pb-16 px-4 sm:px-6 lg:px-8"
+    >
+      {/* Animated gradient mesh background */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(230_70%_20%/0.9),transparent_60%),radial-gradient(ellipse_at_bottom_right,hsl(270_70%_25%/0.8),transparent_60%),radial-gradient(ellipse_at_center,hsl(210_80%_15%/0.7),transparent_70%)]" />
         {[
-          { size: 'w-96 h-96', color: 'bg-blue-500/20', delay: 0, x: [-20, 20] },
-          { size: 'w-96 h-96', color: 'bg-purple-500/20', delay: 2, x: [20, -20] },
-          { size: 'w-96 h-96', color: 'bg-pink-500/20', delay: 4, x: [-15, 15] },
-          { size: 'w-64 h-64', color: 'bg-cyan-400/20', delay: 1, x: [10, -10] },
-          { size: 'w-48 h-48', color: 'bg-emerald-400/25', delay: 3, x: [-10, 10] },
-        ].map((orb, index) => (
+          { c: 'bg-blue-500/25', s: 'w-[28rem] h-[28rem]', pos: 'top-[10%] left-[8%]' },
+          { c: 'bg-purple-500/25', s: 'w-[32rem] h-[32rem]', pos: 'top-[30%] right-[5%]' },
+          { c: 'bg-cyan-400/20', s: 'w-[22rem] h-[22rem]', pos: 'bottom-[8%] left-[25%]' },
+        ].map((o, i) => (
           <motion.div
-            key={index}
-            className={`absolute ${orb.size} ${orb.color} rounded-full blur-3xl`}
-            style={{
-              top: `${25 + index * 15}%`,
-              left: `${20 + index * 10}%`,
-            }}
-            animate={{
-              y: [-30, 30, -30],
-              x: orb.x,
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 8 + index,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: orb.delay,
-            }}
+            key={i}
+            className={`absolute rounded-full blur-3xl ${o.c} ${o.s} ${o.pos}`}
+            animate={{ x: [0, 30, -20, 0], y: [0, -25, 15, 0], scale: [1, 1.1, 0.95, 1] }}
+            transition={{ duration: 14 + i * 2, repeat: Infinity, ease: 'easeInOut' }}
           />
         ))}
-
-        {/* Animated sparkles */}
-        {[Sparkles, Star, Zap].map((Icon, index) => (
-          <motion.div
-            key={index}
-            className="absolute text-blue-400/40"
-            style={{
-              top: `${30 + index * 20}%`,
-              left: `${40 + index * 15}%`,
-            }}
-            animate={{
-              y: [-10, 10, -10],
-              rotate: [0, 360],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 5 + index,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: index * 0.5,
-            }}
-          >
-            <Icon size={16 + index * 2} />
-          </motion.div>
-        ))}
-        
-        <motion.div 
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent"
-          animate={{
-            x: ['-100%', '100%'],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-        />
       </div>
 
-      <motion.div 
-        className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto"
-        variants={containerVariants}
+      <motion.div
+        className="relative z-10 max-w-6xl mx-auto grid lg:grid-cols-[1.3fr_1fr] gap-12 items-center"
+        variants={container}
         initial="hidden"
         animate="visible"
       >
-        <motion.div variants={itemVariants}>
-          <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 relative">
-            <motion.span 
-              className="text-gradient relative whitespace-nowrap inline-block"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-            >
-              Bhimaraju Netaasree
-              <motion.div 
-                className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-lg blur-xl"
-                animate={{
-                  opacity: [0.3, 0.6, 0.3],
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-              />
-            </motion.span>
-          </h1>
-        </motion.div>
+        <div className="text-center lg:text-left order-2 lg:order-1">
+          <motion.p variants={item} className="text-lightblue-400 font-mono text-sm sm:text-base mb-4 tracking-wider">
+            {'>'} Hello world, I'm
+          </motion.p>
 
-        <motion.div variants={itemVariants}>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold mb-10 h-20 relative">
+          <motion.h1
+            variants={item}
+            className="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+          >
+            <span className="text-gradient whitespace-nowrap">Bhimaraju</span>
+            <br />
+            <span className="text-gradient-lightblue">Netaasree</span>
+          </motion.h1>
+
+          <motion.div variants={item} className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 h-12">
+            <span className="text-muted-foreground mr-2">[</span>
             <TypingEffect texts={roles} />
-          </h2>
-        </motion.div>
+            <span className="text-muted-foreground ml-2">]</span>
+          </motion.div>
 
-        <motion.div variants={itemVariants}>
-          <p className="text-xl sm:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-            Crafting beautiful, functional, and user-centered digital experiences
-            with modern technologies and creative problem-solving.
-          </p>
-        </motion.div>
+          <motion.p
+            variants={item}
+            className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+          >
+            Crafting modern web experiences and AI-powered solutions with a focus on clean code and thoughtful design.
+          </motion.p>
 
-        <motion.div variants={itemVariants} className="space-y-8">
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <motion.div variants={item} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
             <motion.a
               href="#projects"
-              className="group relative inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-xl overflow-hidden"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-lightblue-500 to-purple-500 text-white font-semibold rounded-xl shadow-lg shadow-lightblue-500/30"
             >
-              <motion.span className="relative z-10">View My Work</motion.span>
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600"
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1 }}
-              />
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-                initial={{ x: '-100%' }}
-                whileHover={{ x: '100%' }}
-                transition={{ duration: 0.7 }}
-              />
+              View My Work
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </motion.a>
             <motion.a
-              href="#contact"
-              className="group relative inline-flex items-center justify-center px-10 py-4 glass border-2 border-white/30 text-foreground font-semibold rounded-xl overflow-hidden"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+              href="/resume.pdf"
+              download
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 glass border border-white/20 text-foreground font-semibold rounded-xl"
             >
-              <motion.span className="relative z-10">Get In Touch</motion.span>
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10"
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1 }}
-              />
+              <Download size={18} />
+              Download Resume
             </motion.a>
-          </div>
+          </motion.div>
 
-          <div className="flex justify-center space-x-8">
+          <motion.div variants={item} className="flex gap-4 justify-center lg:justify-start">
             {[
-              { href: 'https://github.com/Netaasree', Icon: Github },
-              { href: 'https://www.linkedin.com/in/netaasree-bhimaraju-35261826a/', Icon: Linkedin },
-              { href: 'mailto:bnssrs05@gmail.com', Icon: Mail },
-            ].map(({ href, Icon }, index) => (
+              { href: 'https://github.com/Netaasree', Icon: Github, label: 'GitHub' },
+              { href: 'https://www.linkedin.com/in/netaasree-bhimaraju-35261826a/', Icon: Linkedin, label: 'LinkedIn' },
+              { href: 'mailto:bnssrs05@gmail.com', Icon: Mail, label: 'Email' },
+            ].map(({ href, Icon, label }) => (
               <motion.a
-                key={index}
+                key={label}
                 href={href}
+                aria-label={label}
                 target={href.startsWith('http') ? '_blank' : undefined}
                 rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className="group p-4 glass rounded-full relative overflow-hidden"
-                whileHover={{ scale: 1.25, rotate: 360 }}
+                whileHover={{ scale: 1.15, y: -3 }}
                 whileTap={{ scale: 0.9 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                className="p-3 glass rounded-full hover:text-lightblue-400 transition-colors"
               >
-                <Icon size={28} className="relative z-10 group-hover:text-blue-400 transition-colors" />
-                <motion.div 
-                  className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-md"
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileHover={{ opacity: 1, scale: 1.5 }}
-                />
+                <Icon size={22} />
               </motion.a>
             ))}
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
-        {/* Floating decorative elements */}
-        {[0, 2, 4, 6].map((delay, index) => (
+        {/* Photo with glow and float */}
+        <motion.div variants={item} className="order-1 lg:order-2 flex justify-center">
           <motion.div
-            key={index}
-            className="absolute w-16 h-16 border border-blue-400/20 rounded-full"
-            style={{
-              top: `${-10 + index * 30}%`,
-              left: index % 2 === 0 ? '-10%' : 'auto',
-              right: index % 2 === 1 ? '-10%' : 'auto',
-            }}
-            variants={floatingVariants}
-            animate="animate"
-            transition={{ delay: delay * 0.5 }}
-          />
-        ))}
+            className="relative"
+            animate={{ y: [0, -14, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <div className="absolute -inset-4 bg-gradient-to-tr from-lightblue-500 via-purple-500 to-pink-500 rounded-full blur-2xl opacity-60 animate-pulse-slow" />
+            <div className="absolute -inset-1 bg-gradient-to-tr from-lightblue-400 via-purple-400 to-pink-400 rounded-full opacity-80" />
+            <div className="relative w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden border-4 border-background/60 shadow-2xl">
+              <img
+                src="/images/netaimg.jpg"
+                alt="Bhimaraju Netaasree portrait"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </motion.div>
+        </motion.div>
       </motion.div>
     </section>
   );
