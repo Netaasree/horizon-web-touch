@@ -14,8 +14,8 @@ interface Project {
   longDescription: string;
   tech: string[];
   media: MediaItem[];
-  github: string;
-  live: string;
+  github?: string;
+  live?: string;
   featured: boolean;
 }
 
